@@ -113,7 +113,7 @@ export default class SaveData {
     } else {
       this.id = new Date().getTime().toString(16) + Math.floor(Math.random() * 10000);
     }
-    this.name = '無題';
+    this.name = 'Untitled';
     this.remarks = '';
     this.isDirectory = false;
     this.isOpen = false;
@@ -193,7 +193,7 @@ export default class SaveData {
     root.isReadonly = true;
 
     const folder = new SaveData();
-    folder.name = '保存されたデータ';
+    folder.name = 'Saved Data';
     folder.isDirectory = true;
     folder.isReadonly = true;
     folder.isOpen = true;
@@ -201,13 +201,13 @@ export default class SaveData {
 
     // 初期フォルダー作成 第1～7海域まで作ってやる
     const worlds = [
-      { value: 1, text: '1: 鎮守府海域' },
-      { value: 2, text: '2: 南西諸島海域' },
-      { value: 3, text: '3: 北方海域' },
-      { value: 7, text: '7: 南西海域' },
-      { value: 4, text: '4: 西方海域' },
-      { value: 5, text: '5: 南方海域' },
-      { value: 6, text: '6: 中部海域' },
+      { value: 1, text: '1: Chinjufu Sea Area' },
+      { value: 2, text: '2: Nansei Islands Sea Area' },
+      { value: 3, text: '3: Northern Sea Area' },
+      { value: 7, text: '7: Southwestern Sea Area' },
+      { value: 4, text: '4: Western Sea Area' },
+      { value: 5, text: '5: Southern Sea Area' },
+      { value: 6, text: '6: Central Sea Area' },
     ];
     for (let i = 1; i <= 7; i += 1) {
       const world = worlds.find((v) => v.value === i);

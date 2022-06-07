@@ -2,10 +2,10 @@
   <div class="mt-2">
     <div class="d-flex flex-wrap">
       <div class="form-control">
-        <v-select label="陣形" v-model="formation" :items="formations" hide-details outlined dense @change="updateTable"></v-select>
+        <v-select label="Formation" v-model="formation" :items="formations" hide-details outlined dense @change="updateTable"></v-select>
       </div>
       <div class="form-control">
-        <v-select label="対空CI" v-model="cutInId" :items="antiAirItems" hide-details outlined dense @change="updateTable"></v-select>
+        <v-select label="AACI" v-model="cutInId" :items="antiAirItems" hide-details outlined dense @change="updateTable"></v-select>
       </div>
       <div class="form-control">
         <v-text-field
@@ -13,7 +13,7 @@
           v-model.number="attackerSlot"
           min="0"
           max="999"
-          label="攻撃機搭載数"
+          label="Slot Size"
           hide-details
           outlined
           dense
@@ -21,7 +21,7 @@
         ></v-text-field>
       </div>
       <div class="form-control">
-        <v-select label="対空射撃回避" v-model="avoid" :items="avoids" hide-details outlined dense @change="updateTable"></v-select>
+        <v-select label="AA Resist" v-model="avoid" :items="avoids" hide-details outlined dense @change="updateTable"></v-select>
       </div>
       <div class="form-control">
         <v-text-field
@@ -30,7 +30,7 @@
           max="2"
           step="0.1"
           v-model.number="adj1"
-          label="加重対空補正"
+          label="Ship AA Resist"
           hide-details
           outlined
           dense
@@ -45,7 +45,7 @@
           max="2"
           step="0.1"
           v-model.number="adj2"
-          label="艦隊防空補正"
+          label="Fleet AA Resist"
           hide-details
           outlined
           dense
@@ -56,20 +56,20 @@
     </div>
     <div class="mb-1 d-flex px-1">
       <div class="align-self-end">
-        <span class="text--secondary mr-2">艦隊防空値:</span>
+        <span class="text--secondary mr-2">Fleet Adjusted AA:</span>
         <span>{{ fleetAntiAir }}</span>
       </div>
       <div class="ml-auto d-flex">
-        <v-checkbox class="mr-3" label="空襲マス" v-model="isAirRaid" dense hide-details @change="updateTable"></v-checkbox>
-        <v-checkbox label="敵側式" v-model="isEnemy" dense hide-details @change="updateTable"></v-checkbox>
+        <v-checkbox class="mr-3" label="Air Raid" v-model="isAirRaid" dense hide-details @change="updateTable"></v-checkbox>
+        <v-checkbox label="Enemy" v-model="isEnemy" dense hide-details @change="updateTable"></v-checkbox>
       </div>
     </div>
     <div class="stage2-row header px-1 px-md-2">
-      <div class="flex-grow-1">艦船</div>
-      <div class="stage2-col">割合撃墜</div>
-      <div class="stage2-col">固定撃墜</div>
-      <div class="stage2-col">最低保証</div>
-      <div class="stage2-col">両成功</div>
+      <div class="flex-grow-1">Ship</div>
+      <div class="stage2-col">Proportional Shotdown</div>
+      <div class="stage2-col">Fixed Shotdown</div>
+      <div class="stage2-col">Minimum Shotdown</div>
+      <div class="stage2-col">Prop + Fixed</div>
     </div>
     <div
       v-for="(item, i) in stage2Data"
@@ -88,7 +88,7 @@
           </div>
         </div>
       </div>
-      <div class="stage2-col">{{ item.rate }}({{ item.rateDown }}機)</div>
+      <div class="stage2-col">{{ item.rate }} ({{ item.rateDown }} planes)</div>
       <div class="stage2-col">{{ item.fix }}</div>
       <div class="stage2-col">{{ item.min }}</div>
       <div class="stage2-col">{{ item.sum }}</div>
@@ -211,7 +211,7 @@ export default Vue.extend({
     antiAirItems(): { text: string; value: number }[] {
       const items = [
         {
-          text: '不発',
+          text: 'None',
           value: 0,
           rate: 0,
           detail: '',

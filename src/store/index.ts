@@ -244,26 +244,31 @@ export default new Vuex.Store({
           context.commit('setCells', cells);
         });
 
-      // マスタ問い合わせ
-      getDownloadURL(ref(getStorage(), 'cells.json')).then((url) => {
-        getCellJson(url).then(() => {
-          context.commit('completed', true);
-        }).catch((error) => {
-          console.error(error);
-          // バックアップデータを読み出す
-          getCellJson('./master_bk/cells.json').then(() => {
-            console.log('セル(backup)利用');
-            context.commit('completed', true);
-          });
-        });
-      }).catch((error) => {
-        console.error(error);
-        // バックアップデータを読み出す
-        getCellJson('./master_bk/cells.json').then(() => {
-          console.log('セル(backup)利用');
-          context.commit('completed', true);
-        });
+      getCellJson('./master_local/cells.json').then(() => {
+        console.log('セル(backup)利用');
+        context.commit('completed', true);
       });
+
+      // マスタ問い合わせ
+      // getDownloadURL(ref(getStorage(), 'cells.json')).then((url) => {
+      //   getCellJson(url).then(() => {
+      //     context.commit('completed', true);
+      //   }).catch((error) => {
+      //     console.error(error);
+      //     // バックアップデータを読み出す
+      //     getCellJson('./master_bk/cells.json').then(() => {
+      //       console.log('セル(backup)利用');
+      //       context.commit('completed', true);
+      //     });
+      //   });
+      // }).catch((error) => {
+      //   console.error(error);
+      //   // バックアップデータを読み出す
+      //   getCellJson('./master_bk/cells.json').then(() => {
+      //     console.log('セル(backup)利用');
+      //     context.commit('completed', true);
+      //   });
+      // });
     },
     loadData: async (context) => {
       const getMasterJson = (url: string): Promise<void> => axios.get(url)
@@ -282,25 +287,30 @@ export default new Vuex.Store({
           context.commit('setAreaCount', master.area_count);
         });
 
-      getDownloadURL(ref(getStorage(), 'master.json')).then((url) => {
-        getMasterJson(url).then(() => {
-          context.commit('completed', true);
-        }).catch((error) => {
-          console.error(error);
-          // バックアップデータを読み出す
-          getMasterJson('./master_bk/master.json').then(() => {
-            console.log('マスター(backup)利用');
-            context.commit('completed', true);
-          });
-        });
-      }).catch((error) => {
-        console.error(error);
-        // バックアップデータを読み出す
-        getMasterJson('./master_bk/master.json').then(() => {
-          console.log('マスター(backup)利用');
-          context.commit('completed', true);
-        });
+      getMasterJson('./master_local/master.json').then(() => {
+        console.log('マスター(backup)利用');
+        context.commit('completed', true);
       });
+
+      // getDownloadURL(ref(getStorage(), 'master.json')).then((url) => {
+      //   getMasterJson(url).then(() => {
+      //     context.commit('completed', true);
+      //   }).catch((error) => {
+      //     console.error(error);
+      //     // バックアップデータを読み出す
+      //     getMasterJson('./master_bk/master.json').then(() => {
+      //       console.log('マスター(backup)利用');
+      //       context.commit('completed', true);
+      //     });
+      //   });
+      // }).catch((error) => {
+      //   console.error(error);
+      //   // バックアップデータを読み出す
+      //   getMasterJson('./master_bk/master.json').then(() => {
+      //     console.log('マスター(backup)利用');
+      //     context.commit('completed', true);
+      //   });
+      // });
     },
     loadSaveData: async (context) => {
       // ロード画面を入れる

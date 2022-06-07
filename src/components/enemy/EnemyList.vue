@@ -2,7 +2,7 @@
   <div>
     <v-card>
       <div class="d-flex pt-2 pb-1 pr-2">
-        <div class="align-self-center ml-3">敵艦選択</div>
+        <div class="align-self-center ml-3">Select an Enemy Ship</div>
         <v-spacer></v-spacer>
         <v-btn icon @click="close">
           <v-icon>mdi-close</v-icon>

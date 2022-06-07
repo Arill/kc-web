@@ -4,13 +4,13 @@
       <div class="ml-1">
         <div class="d-flex">
           <div class="tooltip-item-text id">id:{{ value.data.id }}</div>
-          <div class="ml-2 tooltip-item-text">耐久: {{ value.data.hp }}</div>
-          <div class="ml-2 tooltip-item-text">装甲: {{ value.data.armor }} ({{ armor }})</div>
+          <div class="ml-2 tooltip-item-text">HP: {{ value.data.hp }}</div>
+          <div class="ml-2 tooltip-item-text">Armor: {{ value.data.armor }} ({{ armor }})</div>
         </div>
         <div class="d-flex my-1">
           <div>{{ value.data.name }}</div>
           <v-spacer></v-spacer>
-          <div v-if="value.antiAirCutIn.length" class="ml-3 anti-air-cutin">対空CI発動可能</div>
+          <div v-if="value.antiAirCutIn.length" class="ml-3 anti-air-cutin">AACI Capable</div>
         </div>
       </div>
     </div>

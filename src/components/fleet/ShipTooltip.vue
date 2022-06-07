@@ -14,7 +14,7 @@
     <div>
       <table>
         <tr>
-          <td class="text-left">耐久</td>
+          <td class="text-left">HP</td>
           <td>{{ baseHP }}</td>
           <td class="text-right">
             <template v-if="buffHP">
@@ -27,7 +27,7 @@
           <td>{{ value.data.maxHp }}</td>
         </tr>
         <tr v-if="value.asw">
-          <td class="text-left">対潜</td>
+          <td class="text-left">ASW</td>
           <td>{{ baseAsw }}</td>
           <td class="text-right">
             <template v-if="buffAsw > 0">
@@ -40,7 +40,7 @@
           <td>{{ maxAsw }}</td>
         </tr>
         <tr>
-          <td class="text-left">運</td>
+          <td class="text-left">Luck</td>
           <td>{{ baseLuck }}</td>
           <td class="text-right">
             <template v-if="buffLuck">
@@ -53,11 +53,11 @@
           <td>{{ maxLuck }}</td>
         </tr>
         <tr>
-          <td class="text-left" colspan="3">一撃大破</td>
+          <td class="text-left" colspan="3">Overkill (Taiha)</td>
           <td colspan="2">{{ taihaRate }}</td>
         </tr>
         <tr>
-          <td class="text-left" colspan="3">一撃中破</td>
+          <td class="text-left" colspan="3">Overkill (Chuuha)</td>
           <td colspan="2">{{ chuhaRate }}</td>
         </tr>
       </table>
@@ -65,9 +65,9 @@
         <v-divider class="my-3"></v-divider>
         <table>
           <tr>
-            <td class="caption text--secondary text-left">特殊攻撃</td>
-            <td class="caption text--secondary px-8">確保</td>
-            <td class="caption text--secondary">優勢</td>
+            <td class="caption text--secondary text-left">Special Attack</td>
+            <td class="caption text--secondary px-8">AS+</td>
+            <td class="caption text--secondary">AS</td>
           </tr>
           <tr v-for="(row, i) in specialAttacks" :key="`sp${i}`">
             <td class="text-left">
@@ -175,7 +175,7 @@ export default Vue.extend({
       if (this.fleetRosCorr) {
         const array = this.value.getDayBattleSpecialAttackRate(this.fleetRosCorr, this.isFragship);
         if (array.length) {
-          array.push({ text: '合計', rate: [sum(array.map((v) => v.rate[0])), sum(array.map((v) => v.rate[1]))] });
+          array.push({ text: 'Total', rate: [sum(array.map((v) => v.rate[0])), sum(array.map((v) => v.rate[1]))] });
         }
 
         array.forEach((v) => {

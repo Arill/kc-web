@@ -1,7 +1,7 @@
 <template>
   <v-card class="pa-2 detail-card">
     <div class="d-flex pb-1">
-      <div class="align-self-center ml-3">敵艦隊詳細</div>
+      <div class="align-self-center ml-3">Enemy Fleet Details</div>
       <v-spacer></v-spacer>
       <v-btn icon @click="close">
         <v-icon>mdi-close</v-icon>
@@ -9,52 +9,52 @@
     </div>
     <v-divider class="mb-1"></v-divider>
     <v-tabs v-model="tab">
-      <v-tab href="#fleet">艦隊情報</v-tab>
-      <v-tab href="#stage2">対空砲火</v-tab>
-      <v-tab href="#contact">触接</v-tab>
+      <v-tab href="#fleet">Fleet Details</v-tab>
+      <v-tab href="#stage2">Anti-Air</v-tab>
+      <v-tab href="#contact">Contact</v-tab>
       <v-tab-item value="fleet" class="detail-fleet">
         <v-divider></v-divider>
         <div class="body-1 ma-1">
           <div class="d-flex air-power-info flex-wrap">
-            <div class="text--secondary label-text">制空値:</div>
+            <div class="text--secondary label-text">Air Power:</div>
             <div class="value-text mr-3">{{ fleet.fullAirPower }}</div>
             <div>
               <v-chip class="mr-1" color="green" label outlined>
-                <span>確保:</span>
+                <span>AS+:</span>
                 <span class="chip-value">{{ fleet.fullBorders[0] }}</span>
               </v-chip>
               <v-chip class="mr-1" color="light-green" label outlined>
-                <span>優勢:</span>
+                <span>AS:</span>
                 <span class="chip-value">{{ fleet.fullBorders[1] }}</span>
               </v-chip>
               <v-chip class="mr-1" color="orange" label outlined>
-                <span>拮抗:</span>
+                <span>AP:</span>
                 <span class="chip-value">{{ fleet.fullBorders[2] }}</span>
               </v-chip>
               <v-chip class="mr-1" color="deep-orange" label outlined>
-                <span>劣勢:</span>
+                <span>AD:</span>
                 <span class="chip-value">{{ fleet.fullBorders[3] }}</span>
               </v-chip>
             </div>
           </div>
           <div class="mt-1 d-flex air-power-info flex-wrap" v-if="fleet.fullAirPower !== fleet.fullAirbaseAirPower">
-            <div class="text--secondary label-text">基地制空値:</div>
+            <div class="text--secondary label-text">Air Power:</div>
             <div class="value-text mr-3">{{ fleet.fullAirbaseAirPower }}</div>
             <div>
               <v-chip class="mr-1" color="green" label outlined>
-                <span>確保:</span>
+                <span>AS+:</span>
                 <span class="chip-value">{{ fleet.fullAirbaseBorders[0] }}</span>
               </v-chip>
               <v-chip class="mr-1" color="light-green" label outlined>
-                <span>優勢:</span>
+                <span>AS:</span>
                 <span class="chip-value">{{ fleet.fullAirbaseBorders[1] }}</span>
               </v-chip>
               <v-chip class="mr-1" color="orange" label outlined>
-                <span>拮抗:</span>
+                <span>AP:</span>
                 <span class="chip-value">{{ fleet.fullAirbaseBorders[2] }}</span>
               </v-chip>
               <v-chip class="mr-1" color="deep-orange" label outlined>
-                <span>劣勢:</span>
+                <span>AD:</span>
                 <span class="chip-value">{{ fleet.fullAirbaseBorders[3] }}</span>
               </v-chip>
             </div>

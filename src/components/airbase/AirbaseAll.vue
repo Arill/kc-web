@@ -1,7 +1,7 @@
 <template>
   <v-card class="my-2 px-1 py-2">
     <div class="d-flex pb-1">
-      <div class="pl-2 align-self-center">基地航空隊</div>
+      <div class="pl-2 align-self-center">Land Base Air Corps</div>
       <v-spacer></v-spacer>
       <v-tooltip bottom color="black">
         <template v-slot:activator="{ on, attrs }">
@@ -9,7 +9,7 @@
             <v-icon>mdi-wrench</v-icon>
           </v-btn>
         </template>
-        <span>装備一括設定</span>
+        <span>Change equipment settings in a batch</span>
       </v-tooltip>
       <v-tooltip bottom color="black">
         <template v-slot:activator="{ on, attrs }">
@@ -17,7 +17,7 @@
             <v-icon>mdi-reload</v-icon>
           </v-btn>
         </template>
-        <span>搭載数を最大に戻す</span>
+        <span>Resupply all slots</span>
       </v-tooltip>
       <v-tooltip bottom color="black">
         <template v-slot:activator="{ on, attrs }">
@@ -26,8 +26,8 @@
           </v-btn>
         </template>
         <div>
-          <div>基地空襲被害を発生させる</div>
-          <div class="caption">※ 第1スロットから順に搭載数を4機減らします</div>
+          <div>Simulate air raid damage</div>
+          <div class="caption">※ Reduce the number of aircraft by 4 starting from the 1st slot</div>
         </div>
       </v-tooltip>
       <v-tooltip bottom color="black">
@@ -36,7 +36,7 @@
             <v-icon>mdi-trash-can-outline</v-icon>
           </v-btn>
         </template>
-        <span>全基地航空隊リセット</span>
+        <span>Discard all changes</span>
       </v-tooltip>
       <v-tooltip bottom color="black">
         <template v-slot:activator="{ on, attrs }">
@@ -44,7 +44,7 @@
             <v-icon>mdi-camera</v-icon>
           </v-btn>
         </template>
-        <span>スクリーンショットを保存</span>
+        <span>Save screenshot</span>
       </v-tooltip>
       <v-tooltip bottom color="black">
         <template v-slot:activator="{ on, attrs }">
@@ -52,15 +52,15 @@
             <v-icon>mdi-minus</v-icon>
           </v-btn>
         </template>
-        <span>最小化</span>
+        <span>Minimize</span>
       </v-tooltip>
     </div>
     <v-divider></v-divider>
     <div>
       <div class="d-flex">
-        <v-switch v-model="airbaseInfo.isDefense" dense hide-details :label="'防空計算モード'" @click="setInfo"></v-switch>
+        <v-switch v-model="airbaseInfo.isDefense" dense hide-details :label="'Air Defense Calculation Mode'" @click="setInfo"></v-switch>
         <div class="align-self-center ml-3" v-show="!airbaseInfo.isDefense && battleInfo.battleCount > 1 && existsBattleAirbase">
-          <v-btn outlined color="success" @click.stop="targetDialog = true">基地派遣先設定</v-btn>
+          <v-btn outlined color="success" @click.stop="targetDialog = true">Land Base destination</v-btn>
         </div>
         <div class="align-self-center flex-grow-1" v-show="rangeError">
           <v-alert dense outlined type="warning">{{ rangeError }}</v-alert>
@@ -128,8 +128,8 @@
     </div>
     <v-tabs class="small-airbases" v-model="tab" vertical>
       <v-tab v-for="i in 3" :key="i" :href="`#base${i}`">
-        <div class="airbase-tab-text d-none d-sm-block">第{{ i }}基地航空隊</div>
-        <div class="airbase-tab-text d-sm-none">第{{ i }}航空隊</div>
+        <div class="airbase-tab-text d-none d-sm-block">Land Base {{ i }} Air Corps</div>
+        <div class="airbase-tab-text d-sm-none">Land Base {{ i }}</div>
       </v-tab>
       <v-tab-item v-for="(lb, i) in airbaseInfo.airbases" :key="i" :value="`base${i + 1}`" class="py-1">
         <airbase-comp
@@ -185,7 +185,7 @@
     <v-dialog v-model="bulkUpdateDialog" transition="scroll-x-transition" width="600" @input="onBulkUpdateDialogToggle">
       <v-card>
         <div class="d-flex pt-2 pb-1 pr-2">
-          <div class="align-self-center ml-3">装備一括設定</div>
+          <div class="align-self-center ml-3">Change equipment settings in batch</div>
           <v-spacer></v-spacer>
           <v-btn icon @click="bulkUpdateDialog = false">
             <v-icon>mdi-close</v-icon>
@@ -195,13 +195,13 @@
         <div class="px-5 pt-2 pb-5">
           <div>
             <div class="d-flex">
-              <div class="caption">適用対象</div>
+              <div class="caption">Target equipment</div>
               <div class="header-divider"></div>
             </div>
-            <div class="caption">選択されている航空隊に対し、下記の設定を適用します。</div>
+            <div class="caption">Apply the settings to the following Land Bases</div>
             <div class="d-flex justify-space-between">
               <v-checkbox
-                label="全航空隊"
+                label="All Land Bases"
                 dense
                 hide-details
                 @click="toggleBulkTarget"
@@ -211,7 +211,7 @@
               <v-checkbox
                 v-for="(check, i) in bulkUpdateTarget"
                 :key="i"
-                :label="`第${i + 1}基地航空隊`"
+                :label="`Land Base ${i + 1} Air Corps`"
                 dense
                 hide-details
                 v-model="bulkUpdateTarget[i]"
@@ -219,7 +219,7 @@
             </div>
           </div>
           <div class="d-flex mt-8">
-            <div class="caption">熟練度</div>
+            <div class="caption">Proficiency</div>
             <div class="header-divider"></div>
           </div>
           <div class="d-flex justify-space-between">
@@ -227,10 +227,10 @@
               <v-img :src="`./img/util/prof${i - 1}.png`" width="18" height="24"></v-img>
               <span class="level-list-value">{{ getLevelValue(i - 1) }}</span>
             </div>
-            <v-btn color="success" outlined @click="setMaxLevelOnlyFighter">戦闘機のみ最大</v-btn>
+            <v-btn color="success" outlined @click="setMaxLevelOnlyFighter">Max for fighters only</v-btn>
           </div>
           <div class="d-flex mt-8">
-            <div class="caption">改修値</div>
+            <div class="caption">Improvements</div>
             <div class="header-divider"></div>
           </div>
           <div class="d-flex justify-space-between">
@@ -240,7 +240,7 @@
             </div>
           </div>
           <div class="d-flex mt-8">
-            <div class="caption">艦載機搭載数</div>
+            <div class="caption">Slot size</div>
             <div class="header-divider"></div>
           </div>
           <div class="d-flex">
@@ -268,55 +268,55 @@
             <div class="flex-grow-1 mx-2">
               <v-tooltip bottom color="black">
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn v-bind="attrs" v-on="on" outlined @click="setSlot(1)" block color="red">1機</v-btn>
+                  <v-btn v-bind="attrs" v-on="on" outlined @click="setSlot(1)" block color="red">1</v-btn>
                 </template>
                 <div class="body-2">
-                  <div><span class="red--text">制空権喪失</span>において、stage1被撃墜数が0となる最大機数</div>
+                  <div><span class="red--text">AI</span>, accounting only Stage 1 losses</div>
                 </div>
               </v-tooltip>
             </div>
             <div class="flex-grow-1 mx-2">
               <v-tooltip bottom color="black">
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn v-bind="attrs" v-on="on" outlined @click="setSlot(2)" block color="orange darken-4">2機</v-btn>
+                  <v-btn v-bind="attrs" v-on="on" outlined @click="setSlot(2)" block color="orange darken-4">2</v-btn>
                 </template>
                 <div class="body-2">
-                  <div><span class="orange--text">航空劣勢</span>において、stage1被撃墜数が0となる最大機数</div>
+                  <div><span class="orange--text">AD</span>, accounting only Stage 1 losses</div>
                 </div>
               </v-tooltip>
             </div>
             <div class="flex-grow-1 mx-2">
               <v-tooltip bottom color="black">
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn v-bind="attrs" v-on="on" outlined @click="setSlot(3)" block color="yellow darken-4">3機</v-btn>
+                  <v-btn v-bind="attrs" v-on="on" outlined @click="setSlot(3)" block color="yellow darken-4">3</v-btn>
                 </template>
                 <div class="body-2">
-                  <div><span class="yellow--text">航空拮抗</span>において、stage1被撃墜数が0となる最大機数</div>
+                  <div><span class="yellow--text">航空AP</span>, accounting only Stage 1 losses</div>
                 </div>
               </v-tooltip>
             </div>
             <div class="flex-grow-1 mx-2">
               <v-tooltip bottom color="black">
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn v-bind="attrs" v-on="on" outlined @click="setSlot(5)" block color="light-green">5機</v-btn>
+                  <v-btn v-bind="attrs" v-on="on" outlined @click="setSlot(5)" block color="light-green">5</v-btn>
                 </template>
                 <div class="body-2">
-                  <div><span class="light-green--text">航空優勢</span>において、stage1被撃墜数が0となる最大機数</div>
+                  <div><span class="light-green--text">AS</span>, accounting only Stage 1 losses</div>
                 </div>
               </v-tooltip>
             </div>
             <div class="flex-grow-1 mx-2">
               <v-tooltip bottom color="black">
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn v-bind="attrs" v-on="on" outlined @click="setSlot(17)" block color="success">17機</v-btn>
+                  <v-btn v-bind="attrs" v-on="on" outlined @click="setSlot(17)" block color="success">17</v-btn>
                 </template>
                 <div class="body-2">
-                  <div><span class="success--text">制空権確保</span>において、stage1被撃墜数が0となる最大機数</div>
+                  <div><span class="success--text">AS+</span>, accounting only Stage 1 losses</div>
                 </div>
               </v-tooltip>
             </div>
             <div class="flex-grow-1 mx-2">
-              <v-btn outlined @click="resetSlot" block>18機</v-btn>
+              <v-btn outlined @click="resetSlot" block>18</v-btn>
             </div>
           </div>
         </div>
@@ -551,16 +551,16 @@ export default Vue.extend({
         if (cell1 && airbase.range < cell1.range) {
           // 6-4基地半径緩和チェック
           if (cell1.area !== 64 || cell1.nodeName !== 'N' || !airbase.hasJet) {
-            errors.push(`第${i + 1}`);
+            errors.push(`Land Base ${i + 1}`);
           }
         } else if (cell2 && airbase.range < cell2.range) {
           // 6-4基地半径緩和チェック
           if (cell2.area !== 64 || cell2.nodeName !== 'N' || !airbase.hasJet) {
-            errors.push(`第${i + 1}`);
+            errors.push(`Land Base ${i + 1}`);
           }
         }
       }
-      return errors.length ? `${errors.join(',')}基地航空隊の半径が不足しています。` : '';
+      return errors.length ? `${errors.join(', ')}: Insufficient range` : '';
     },
     isbulkUpdateTargetAll(): boolean {
       return !this.bulkUpdateTarget.some((v) => !v);

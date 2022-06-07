@@ -31,7 +31,7 @@ export default class CommonCalc {
    * @memberof Calculator
    */
   public static getStage1ShootDownValue(state: number, slot: number): number {
-    // 制空定数c = 確保から順に 1, 3, 5, 7, 10
+    // 制空定数c = AS+から順に 1, 3, 5, 7, 10
     const c = [1, 3, 5, 7, 10][state];
     // A = 0 ~ (制空定数c / 3)の乱数
     const a = Math.floor(Math.random() * (((c / 3) * 1000) + 1)) / 1000;
@@ -48,7 +48,7 @@ export default class CommonCalc {
    * @memberof Calculator
    */
   public static getStage1ShootDownValueEnemy(state: number, slot: number): number {
-    // 制空定数c = 確保から順に 10, 8, 6, 4, 1
+    // 制空定数c = AS+から順に 10, 8, 6, 4, 1
     const c = [10, 8, 6, 4, 1][state];
     // 0 ~ 制空定数c の一様な整数乱数
     const x = Math.floor(Math.random() * (c + 1));
@@ -169,23 +169,23 @@ export default class CommonCalc {
     // 求ム計算式
     switch (item.grow) {
       case 2:
-        return '100 戦';
+        return '100 Sorties';
       case 3:
-        return '57 ~ 75 戦';
+        return '57 ~ 75 Sorties';
       case 4:
-        return '39 ~ 47 戦';
+        return '39 ~ 47 Sorties';
       case 5:
-        return '31 ~ 40 戦';
+        return '31 ~ 40 Sorties';
       case 6:
-        return '25 ~ 31 戦';
+        return '25 ~ 31 Sorties';
       case 7:
-        return '20 ~ 28 戦';
+        return '20 ~ 28 Sorties';
       case 8:
-        return '18 ~ 23 戦';
+        return '18 ~ 23 Sorties';
       case 9:
-        return '16 ~ 20 戦';
+        return '16 ~ 20 Sorties';
       default:
-        return '不明';
+        return 'Undiscovered';
     }
   }
 }

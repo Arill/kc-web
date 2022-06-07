@@ -256,7 +256,7 @@ export default class Calculator {
       usedSteel += Math.round(item.slot * item.data.cost * 0.2);
 
       // ====== STAGE1 ======
-      // ジェット補正で0.6倍 切り捨て 確保固定
+      // ジェット補正で0.6倍 切り捨て AS+固定
       item.slot -= Math.floor(0.6 * CommonCalc.getStage1ShootDownValue(AIR_STATE.KAKUHO, item.slot));
 
       // ====== STAGE2 ======

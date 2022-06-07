@@ -3,7 +3,7 @@
     <div class="d-flex py-2 pr-2">
       <div class="align-self-center item-search-text ml-5">
         <v-text-field
-          placeholder="図鑑id 名称検索"
+          placeholder="Search by ID"
           clearable
           v-model="keyword"
           @input="filter()"
@@ -36,17 +36,17 @@
           </v-card>
         </v-menu>
       </div>
-      <div class="align-self-end caption">以上</div>
+      <div class="align-self-end caption">and above</div>
       <v-spacer></v-spacer>
       <div class="d-none d-sm-block mr-5">
         <v-btn-toggle dense v-model="multiLine" borderless mandatory>
           <v-btn :value="false" :class="{ blue: !multiLine, secondary: multiLine }" @click.stop="changeMultiLine(false)">
             <v-icon color="white">mdi-view-headline</v-icon>
-            <span class="white--text">一列</span>
+            <span class="white--text">Rows</span>
           </v-btn>
           <v-btn :value="true" :class="{ blue: multiLine, secondary: !multiLine }" @click.stop="changeMultiLine(true)">
             <v-icon color="white">mdi-view-comfy</v-icon>
-            <span class="white--text">複数列</span>
+            <span class="white--text">Columns</span>
           </v-btn>
         </v-btn-toggle>
       </div>
@@ -57,10 +57,10 @@
     <v-divider></v-divider>
     <div class="d-flex flex-wrap px-3">
       <div class="align-self-center my-3">
-        <v-checkbox v-model="isEnemyMode" @change="filter()" hide-details dense label="敵装備"></v-checkbox>
+        <v-checkbox v-model="isEnemyMode" @change="filter()" hide-details dense label="Enemy Equipment"></v-checkbox>
       </div>
       <div class="ml-3 align-self-center my-3" v-if="itemStock.length && !isEnemyMode">
-        <v-checkbox v-model="isStockOnly" @click="clickedStockOnly" hide-details dense label="所持装備反映"></v-checkbox>
+        <v-checkbox v-model="isStockOnly" @click="clickedStockOnly" hide-details dense label="Equip Stock Only"></v-checkbox>
       </div>
       <v-spacer></v-spacer>
     </div>
@@ -457,25 +457,25 @@ export default Vue.extend({
     confirmDialog: false,
     confirmItem: { item: new Item(), count: 0 },
     headerItems: [
-      { text: '火力', key: 'actualFire' },
-      { text: '雷装', key: 'actualTorpedo' },
-      { text: '爆装', key: 'actualBomber' },
-      { text: '対空', key: 'antiAir' },
-      { text: '出撃対空', key: 'actualAntiAir' },
-      { text: '防空対空', key: 'actualDefenseAntiAir' },
-      { text: '装甲', key: 'armor' },
-      { text: '対潜', key: 'asw' },
-      { text: '対潜', key: 'actualAsw' },
-      { text: '回避', key: 'avoid' },
-      { text: '索敵', key: 'actualScout' },
-      { text: '命中', key: 'actualAccuracy' },
-      { text: '対爆', key: 'antiBomber' },
-      { text: '加重対空', key: 'antiAirWeight' },
-      { text: '艦隊防空', key: 'antiAirBonus' },
-      { text: '半径', key: 'radius' },
-      { text: 'コスト', key: 'cost' },
+      { text: 'FP', key: 'actualFire' },
+      { text: 'TP', key: 'actualTorpedo' },
+      { text: 'DB', key: 'actualBomber' },
+      { text: 'AA', key: 'antiAir' },
+      { text: 'Sortie AA', key: 'actualAntiAir' },
+      { text: 'Defense AA', key: 'actualDefenseAntiAir' },
+      { text: 'Armor', key: 'armor' },
+      { text: 'ASW', key: 'asw' },
+      { text: 'ASW', key: 'actualAsw' },
+      { text: 'Evasion', key: 'avoid' },
+      { text: 'LOS', key: 'actualScout' },
+      { text: 'ACC', key: 'actualAccuracy' },
+      { text: 'Anti-Bomber', key: 'antiBomber' },
+      { text: 'Ship AA', key: 'antiAirWeight' },
+      { text: 'Fleet AA', key: 'antiAirBonus' },
+      { text: 'Radius', key: 'radius' },
+      { text: 'Cost', key: 'cost' },
       { text: 'TP', key: 'tp' },
-      { text: '射撃回避', key: 'avoidId' },
+      { text: 'AA Resist', key: 'avoidId' },
     ],
     enabledTooltip: false,
     tooltipTimer: undefined as undefined | number,
@@ -499,7 +499,7 @@ export default Vue.extend({
 
     for (let i = 0; i < this.headerItems.length; i += 1) {
       const { text, key } = this.headerItems[i];
-      if (text === '対潜' && this.filterStatusItems.find((v) => v.text === '対潜')) {
+      if (text === 'ASW' && this.filterStatusItems.find((v) => v.text === 'ASW')) {
         continue;
       }
       this.filterStatusItems.push({ text, value: key });

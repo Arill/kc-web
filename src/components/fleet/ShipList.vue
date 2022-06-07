@@ -5,7 +5,7 @@
         <v-text-field
           dense
           hide-details
-          placeholder="図鑑id 名称検索"
+          placeholder="Search by ID"
           v-model.trim="keyword"
           @input="filter()"
           clearable
@@ -17,11 +17,11 @@
         <v-btn-toggle dense v-model="multiLine" borderless mandatory>
           <v-btn :value="false" :class="{ blue: !multiLine, secondary: multiLine }" @click.stop="changeMultiLine(false)">
             <v-icon color="white">mdi-view-headline</v-icon>
-            <span class="white--text">一列</span>
+            <span class="white--text">Rows</span>
           </v-btn>
           <v-btn :value="true" :class="{ blue: multiLine, secondary: !multiLine }" @click.stop="changeMultiLine(true)">
             <v-icon color="white">mdi-view-comfy</v-icon>
-            <span class="white--text">複数列</span>
+            <span class="white--text">Columns</span>
           </v-btn>
         </v-btn-toggle>
       </div>

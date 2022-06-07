@@ -57,7 +57,7 @@ export default class AirCalcResult {
     const [b0, b1, b2, b3] = AirCalcResult.getBorders(result.avgEnemyAirPower);
 
     if (b0 <= 0) {
-      // 敵制空値がない場合は確保固定
+      // 敵制空値がない場合はAS+固定
       result.airStateBarWidth = 100;
     } else if (result.avgAirPower >= b0) {
       result.airStateBarWidth = (result.avgAirPower / b0) * 100 * 0.9;

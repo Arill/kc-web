@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <div class="d-flex pt-2 pb-1 pr-2">
-      <div class="align-self-center ml-3">装備プリセット</div>
+      <div class="align-self-center ml-3">Equipment Presets</div>
       <v-spacer></v-spacer>
       <v-btn icon @click="handleClose">
         <v-icon>mdi-close</v-icon>
@@ -9,7 +9,7 @@
     </div>
     <v-divider></v-divider>
     <div class="px-3 pt-3">
-      <v-btn color="teal" :dark="!disabledRegist" :disabled="disabledRegist" @click="readyPreset()">現在の装備構成で新規登録</v-btn>
+      <v-btn color="teal" :dark="!disabledRegist" :disabled="disabledRegist" @click="readyPreset()">Register current loadout as preset</v-btn>
       <v-divider class="mt-3"></v-divider>
       <div class="preset-container py-1">
         <div class="preset-list">
@@ -28,11 +28,11 @@
         <div class="preset-view pl-2">
           <div class="mt-5 d-flex" v-if="!isPresetItemEmpty">
             <div>
-              <v-text-field label="名称" outlined v-model.trim="selectedPreset.name" counter clearable dense maxlength="100"></v-text-field>
+              <v-text-field label="Name" outlined v-model.trim="selectedPreset.name" counter clearable dense maxlength="100"></v-text-field>
             </div>
             <div>
               <v-btn class="ml-1" color="success" :disabled="!selectedPreset.name" @click="savePreset()">{{
-                selectedIndex >= 0 ? "更新" : "保存"
+                selectedIndex >= 0 ? "Update" : "Save"
               }}</v-btn>
             </div>
           </div>
@@ -49,7 +49,7 @@
               </div>
             </div>
             <div v-if="exItemView.data.id" class="mt-4 d-flex ml-1">
-              <div class="caption">補強増設</div>
+              <div class="caption">RE</div>
               <div class="divider-line"></div>
             </div>
             <div v-if="exItemView.data.id" class="view-item">
@@ -69,8 +69,8 @@
             </div>
           </div>
           <div class="d-flex my-3 justify-end" v-if="!isPresetItemEmpty">
-            <v-btn v-if="selectedIndex >= 0" color="primary" @click="expandPreset()">展開</v-btn>
-            <v-btn class="ml-3" color="error" :disabled="selectedIndex < 0" @click="deletePreset()">削除</v-btn>
+            <v-btn v-if="selectedIndex >= 0" color="primary" @click="expandPreset()">Load</v-btn>
+            <v-btn class="ml-3" color="error" :disabled="selectedIndex < 0" @click="deletePreset()">Delete</v-btn>
           </div>
         </div>
       </div>
@@ -230,7 +230,7 @@ export default Vue.extend({
         newPreset.id = maxId;
       }
       newPreset.id += 1;
-      newPreset.name = `装備プリセット${newPreset.id}`;
+      newPreset.name = `Equipment preset ${newPreset.id}`;
       // 装備id一覧
       for (let i = 0; i < this.value.items.length; i += 1) {
         const item = this.value.items[i];
@@ -253,7 +253,7 @@ export default Vue.extend({
       }
       // ブラウザに保存
       this.$store.dispatch('updateItemPresets', this.presets);
-      this.infoText = '保存しました。';
+      this.infoText = 'Preset saved.';
       this.snackbar = true;
       this.selectedIndex = -1;
       this.selectedPreset = new ItemPreset();
@@ -263,7 +263,7 @@ export default Vue.extend({
       // ブラウザに保存
       this.$store.dispatch('updateItemPresets', this.presets);
       this.snackbar = true;
-      this.infoText = '削除しました。';
+      this.infoText = 'Preset deleted.';
       this.selectedIndex = -1;
       this.selectedPreset = new ItemPreset();
     },

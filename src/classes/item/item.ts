@@ -98,7 +98,7 @@ export default class Item {
   /** 支援制空値 */
   public readonly supportAirPower: number;
 
-  /** 触接選択率 [確保時, 優勢時, 劣勢時] */
+  /** 触接選択率 [AS+時, AS時, AD時] */
   public readonly contactSelectRates: number[];
 
   /** 輸送量 */
@@ -791,7 +791,7 @@ export default class Item {
    */
   public static getContactRates(items: Item[]): ContactRate[] {
     let sumCotactValue = 0;
-    // 補正率別 触接選択率テーブル[ 0:確保時, 1:優勢時, 2:劣勢時 ]
+    // 補正率別 触接選択率テーブル[ 0:AS+時, 1:AS時, 2:AD時 ]
     const contact120 = [[] as number[], [] as number[], [] as number[]];
     const contact117 = [[] as number[], [] as number[], [] as number[]];
     const contact112 = [[] as number[], [] as number[], [] as number[]];
@@ -816,7 +816,7 @@ export default class Item {
       Math.min(a / 55, 1),
     ];
 
-    // 実触接率 = [ 0:確保, 1:優勢, 2:劣勢 ]
+    // 実触接率 = [ 0:AS+, 1:AS, 2:AD ]
     const actualContactRate = [
       { contact120: 0, contact117: 0, contact112: 0 },
       { contact120: 0, contact117: 0, contact112: 0 },

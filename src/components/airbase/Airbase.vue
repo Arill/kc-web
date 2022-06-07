@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-1 pt-1" @dragover.prevent @drop.stop>
     <div class="d-flex mb-1">
-      <div class="ml-2 align-self-end airbase-title">第{{ index + 1 }}基地航空隊</div>
+      <div class="ml-2 align-self-end airbase-title">Land Base {{ index + 1 }} Air Corps</div>
       <v-spacer></v-spacer>
       <div class="mr-1 mode-select">
         <v-select dense v-model="airbase.mode" hide-details :items="modes" @change="updateItem" :disabled="!enabledDetail"></v-select>
@@ -16,7 +16,7 @@
               <v-icon small>mdi-briefcase-variant</v-icon>
             </v-btn>
           </template>
-          <span>装備プリセット</span>
+          <span>Equipment Presets</span>
         </v-tooltip>
         <v-btn icon small @click="resetItems">
           <v-icon small>mdi-trash-can-outline</v-icon>
@@ -26,7 +26,7 @@
     <div>
       <div class="d-flex caption pl-2 sub-status-area">
         <div>
-          制空:<span class="ml-1 font-weight-medium">{{ airPower }}</span>
+          Air Power:<span class="ml-1 font-weight-medium">{{ airPower }}</span>
         </div>
         <template v-if="!visibleResource">
           <div class="ml-1 text--secondary font-weight-medium">{{ airPowerDetail }}</div>
@@ -34,7 +34,7 @@
           <div class="ml-1 text--secondary font-weight-medium" v-if="reconCorrDefString">&times;{{ reconCorrDefString }}</div>
         </template>
         <div :class="{ 'ml-auto': !visibleResource, 'ml-2': visibleResource }">
-          半径:<span class="mx-1 font-weight-medium">{{ airbase.range }}</span>
+          Range:<span class="mx-1 font-weight-medium">{{ airbase.range }}</span>
         </div>
         <template v-if="visibleResource">
           <div class="ml-auto"><v-img :src="`./img/util/fuel.png`" height="18" width="18"></v-img></div>
@@ -83,7 +83,7 @@
     <v-dialog width="1200" v-model="detailDialog" transition="scroll-x-transition" @input="toggleDetailDialog">
       <v-card class="px-2 pb-2" v-if="!destroyDialog">
         <div class="d-flex pt-2 pb-1">
-          <div class="align-self-center ml-3">基地航空隊詳細</div>
+          <div class="align-self-center ml-3">Land Base Air Corps Details</div>
           <v-spacer></v-spacer>
           <v-btn icon @click="closeDetail">
             <v-icon>mdi-close</v-icon>
@@ -91,8 +91,8 @@
         </div>
         <v-divider></v-divider>
         <v-tabs v-model="tab">
-          <v-tab href="#contact">触接</v-tab>
-          <v-tab href="#detail">被撃墜数詳細</v-tab>
+          <v-tab href="#contact">Contact</v-tab>
+          <v-tab href="#detail">Shotdown & Damage</v-tab>
           <v-tab-item value="contact">
             <v-divider></v-divider>
             <contact-rates :fleet="value" />

@@ -1,7 +1,7 @@
 <template>
   <v-card class="my-2 px-1 py-2" id="result-container" :class="{ captured: capturing }">
     <div class="d-flex pb-1">
-      <div class="pl-2 align-self-center">計算結果</div>
+      <div class="pl-2 align-self-center">Simulation Results</div>
       <v-spacer></v-spacer>
       <v-tooltip bottom color="black">
         <template v-slot:activator="{ on, attrs }">
@@ -9,7 +9,7 @@
             <v-icon>mdi-refresh</v-icon>
           </v-btn>
         </template>
-        <span>再計算</span>
+        <span>Simulate again</span>
       </v-tooltip>
       <v-tooltip bottom color="black">
         <template v-slot:activator="{ on, attrs }">
@@ -17,7 +17,7 @@
             <v-icon>mdi-camera</v-icon>
           </v-btn>
         </template>
-        <span>スクリーンショットを保存</span>
+        <span>Save screenshot</span>
       </v-tooltip>
       <v-tooltip bottom color="black">
         <template v-slot:activator="{ on, attrs }">
@@ -25,34 +25,34 @@
             <v-icon>mdi-minus</v-icon>
           </v-btn>
         </template>
-        <span>最小化</span>
+        <span>Minimize</span>
       </v-tooltip>
     </div>
     <v-divider class="mb-3"></v-divider>
     <v-alert border="left" dense outlined type="info" class="ma-3 body-2" v-if="!moreCalculateRequested && !capturing">
       <div class="d-flex">
-        <div class="align-self-center">出撃{{ calculateCount.toLocaleString() }}回分の計算結果が表示されています。</div>
+        <div class="align-self-center">Displaying the simulation result for {{ calculateCount.toLocaleString() }} sorties.</div>
         <div class="align-self-center ml-2">
-          <v-btn small color="info" @click="calculateMore()" :disabled="moreCalculateRequested">再計算して精度を上げる</v-btn>
+          <v-btn small color="info" @click="calculateMore()" :disabled="moreCalculateRequested">Simulate with increased accuracy</v-btn>
         </div>
       </div>
     </v-alert>
     <v-alert border="left" dense outlined type="warning" class="ma-3 body-2" v-if="existUnknownEnemy">
-      <div>搭載数が未確定の敵艦が含まれています。計算結果が実際の制空状態と異なる可能性があります。</div>
+      <div>This simulation includes enemies who have unconfirmed AS values. The results may differ from the actual AS conditions.</div>
     </v-alert>
     <div class="px-3">
       <div class="d-flex">
-        <div class="body-2 px-2">戦闘開始時の搭載数推移</div>
-        <div class="caption ml-auto" v-show="!capturing">※ 行クリックで詳細計算画面展開</div>
+        <div class="body-2 px-2">Changes on Aircraft deployed through the sortie</div>
+        <div class="caption ml-auto" v-show="!capturing">※ Click on a line to show detailed calculations.</div>
       </div>
       <table>
         <thead>
           <tr>
-            <th class="text-center">艦娘</th>
-            <th class="text-center">装備</th>
-            <th v-for="i in battleCount" :key="i" :class="`td-battle${i - 1}`">{{ i }}戦目</th>
-            <th>出撃後</th>
-            <th class="pr-1">全滅率</th>
+            <th class="text-center">Shipgirl</th>
+            <th class="text-center">Aircraft</th>
+            <th v-for="i in battleCount" :key="i" :class="`td-battle${i - 1}`">Node {{ i }}</th>
+            <th>After the Sortie</th>
+            <th class="pr-1">Deplaning Rate</th>
           </tr>
         </thead>
         <tbody>
@@ -71,13 +71,13 @@
             </tr>
           </template>
           <tr>
-            <td class="text-center" rowspan="2">制空値(平均)</td>
-            <td class="text-center py-1">自艦隊</td>
+            <td class="text-center" rowspan="2">Air Power (Average)</td>
+            <td class="text-center py-1">Allied Fleet</td>
             <td v-for="(result, i) in results" :key="i" class="pr-md-1" :class="`td-battle${i}`">{{ result.avgAirPower }}</td>
-            <td class="text-center header-td" colspan="2">消費予測</td>
+            <td class="text-center header-td" colspan="2">Consumption Prediction</td>
           </tr>
           <tr>
-            <td class="text-center py-1">敵艦隊</td>
+            <td class="text-center py-1">Enemy Fleet</td>
             <td v-for="(result, i) in results" :key="i" class="pr-md-1" :class="`td-battle${i}`">
               <span :class="{ 'orange--text text--darken-2': result.isUnknownEnemyAirPower }">
                 {{ result.avgEnemyAirPower }}
@@ -98,13 +98,13 @@
             </td>
           </tr>
           <tr class="tr-status">
-            <td class="text-center" colspan="2">制空状態</td>
+            <td class="text-center" colspan="2">Air State</td>
             <td v-for="(result, i) in results" :key="i" :class="`td-battle${i}`">
               <span :class="`state-label state-${result.airState.value}`">{{ result.airState.text }}</span>
             </td>
           </tr>
           <tr class="tr-status tr-fuel-ammo">
-            <td class="text-center" colspan="2">燃料 &amp; 弾薬</td>
+            <td class="text-center" colspan="2">Fuel &amp; Ammo</td>
             <td v-for="(row, i) in remainingFuelAndAmmos" :key="i" :class="`td-battle${i}`">
               <div
                 class="d-flex flex-wrap justify-end"
@@ -139,7 +139,7 @@
       <v-divider></v-divider>
     </div>
     <v-tabs v-model="tab" class="px-3">
-      <v-tab v-for="(enemyFleet, i) in battles" :key="i" :href="`#battle${i}`" @click="changedTab(i)">{{ i + 1 }}戦目</v-tab>
+      <v-tab v-for="(enemyFleet, i) in battles" :key="i" :href="`#battle${i}`" @click="changedTab(i)">Node {{ i + 1 }}</v-tab>
     </v-tabs>
     <v-divider class="mx-3"></v-divider>
     <v-card class="ma-3 py-3 pr-4 pl-2">
@@ -147,23 +147,23 @@
         <div class="bar-label"></div>
         <div class="flex-grow-1 d-flex">
           <div class="status-bar-label" style="width: 10%">
-            <div>喪失</div>
+            <div>AI</div>
           </div>
           <div class="status-bar-divide"></div>
           <div class="status-bar-label" style="width: 10%">
-            <div>劣勢</div>
+            <div>AD</div>
           </div>
           <div class="status-bar-divide"></div>
           <div class="status-bar-label" style="width: 25%">
-            <div>拮抗</div>
+            <div>AP</div>
           </div>
           <div class="status-bar-divide"></div>
           <div class="status-bar-label" style="width: 45%">
-            <div>優勢</div>
+            <div>AS</div>
           </div>
           <div class="status-bar-divide"></div>
           <div class="status-bar-label" style="width: 10%">
-            <div>確保</div>
+            <div>AS+</div>
           </div>
         </div>
       </div>
@@ -176,25 +176,25 @@
         </div>
       </div>
       <div class="d-flex mt-2">
-        <div class="bar-label">本隊</div>
+        <div class="bar-label">Main Fleet</div>
         <div class="align-self-center flex-grow-1">
           <air-status-result-bar :result="fleet.mainResult" :no-label="true"></air-status-result-bar>
         </div>
       </div>
     </v-card>
     <v-card class="ma-3 py-3 px-2">
-      <div class="body-2 px-2 mb-1">各フェーズ制空状態の確率</div>
+      <div class="body-2 px-2 mb-1">Air State probabilities for each phase</div>
       <table>
         <thead>
           <tr>
             <th></th>
-            <th>制空値</th>
-            <th>敵制空値( 確保 / 優勢 / 拮抗 / 劣勢)</th>
-            <th class="pr-sm-1">確保</th>
-            <th class="pr-sm-1">優勢</th>
-            <th class="pr-sm-1">拮抗</th>
-            <th class="pr-sm-1">劣勢</th>
-            <th class="pr-sm-1">喪失</th>
+            <th>Air Power</th>
+            <th>Enemy Air Power ( AS+ / AS / AP / AD )</th>
+            <th class="pr-sm-1">AS+</th>
+            <th class="pr-sm-1">AS</th>
+            <th class="pr-sm-1">AP</th>
+            <th class="pr-sm-1">AD</th>
+            <th class="pr-sm-1">AI</th>
             <th></th>
           </tr>
         </thead>
@@ -209,7 +209,7 @@
             </td>
           </tr>
           <tr>
-            <td>本隊</td>
+            <td>Main Fleet</td>
             <td>{{ fleet.mainResult.avgAirPower }}</td>
             <td>{{ airPowerBorders(fleet.mainResult.avgEnemyAirPower) }}</td>
             <td v-for="(rate, i) in fleet.mainResult.rates" :key="i" class="pr-sm-1 py-1">
@@ -223,7 +223,7 @@
     </v-card>
     <v-card class="ma-3 pb-3 px-2">
       <div class="d-flex mb-1">
-        <div class="body-2 px-2 align-self-end">敵機残数</div>
+        <div class="body-2 px-2 align-self-end">Remaining Enemy Aircraft</div>
         <div class="ml-auto">
           <v-select
             class="form-input"
@@ -239,20 +239,20 @@
             <v-icon class="align-self-center pt-2 mr-1" small v-bind="attrs" v-on="on">mdi-help-circle-outline</v-icon>
           </template>
           <div class="caption">
-            <div>このマスで選択する味方艦隊の陣形</div>
+            <div>Select the Main Fleet's formation here</div>
           </div>
         </v-tooltip>
       </div>
       <table>
         <thead>
           <tr>
-            <th class="text-center">敵艦</th>
-            <th class="text-center">装備</th>
-            <th>初期搭載</th>
-            <th>残数平均</th>
-            <th>全滅率</th>
-            <th>棒立ち率</th>
-            <th class="pr-1" v-if="!capturing">詳細</th>
+            <th class="text-center">Enemy Ship</th>
+            <th class="text-center">Aircraft</th>
+            <th>Initial Slot Size</th>
+            <th>Average Slot Size</th>
+            <th>Deplaning Rate</th>
+            <th>Disabled Rate</th>
+            <th class="pr-1" v-if="!capturing">Details</th>
           </tr>
         </thead>
         <tbody>
@@ -283,19 +283,19 @@
       <v-divider></v-divider>
     </v-card>
     <v-card class="ma-3 py-3 px-2">
-      <div class="body-2 px-2">支援艦隊</div>
+      <div class="body-2 px-2">Support Fleet</div>
       <table>
         <thead>
           <tr>
-            <th class="text-left py-1 pl-3">艦隊</th>
-            <th class="text-left">種別</th>
-            <th>制空値</th>
-            <th>敵制空値( 確保 / 優勢 / 拮抗 / 劣勢)</th>
-            <th class="pr-2">確保</th>
-            <th class="pr-2">優勢</th>
-            <th class="pr-2">拮抗</th>
-            <th class="pr-2">劣勢</th>
-            <th class="pr-2">喪失</th>
+            <th class="text-left py-1 pl-3">Fleet</th>
+            <th class="text-left">Support Type</th>
+            <th>Air Power</th>
+            <th>Enemy Air Power ( AS+ / AS / AP / AD )</th>
+            <th class="pr-2">AS+</th>
+            <th class="pr-2">AS</th>
+            <th class="pr-2">AP</th>
+            <th class="pr-2">AD</th>
+            <th class="pr-2">AI</th>
           </tr>
         </thead>
         <tbody>
@@ -312,13 +312,13 @@
         </tbody>
       </table>
       <v-divider></v-divider>
-      <div class="pl-2 caption mt-1">※ 制空値は航空支援専用の制空値です。熟練度や改修値に影響されません。</div>
-      <div class="pl-2 caption">※ 敵制空値は本隊航空戦終了時点での制空値の平均です。</div>
+      <div class="pl-2 caption mt-1">※ The Air Power values are exclusive to Aerial Support. It's not affected by Proficiency or Improvements.</div>
+      <div class="pl-2 caption">※ The Enemy Air Power value is the average Air Power after the Main Fleet air battle.</div>
     </v-card>
     <v-dialog width="1200" v-model="detailDialog" transition="scroll-x-transition" @input="toggleDetailDialog">
       <v-card>
         <div class="d-flex pt-2 pb-1 pr-2">
-          <div class="align-self-center ml-3">詳細計算</div>
+          <div class="align-self-center ml-3">Detailed Calculations</div>
           <v-spacer></v-spacer>
           <v-btn icon @click="closeDetail">
             <v-icon>mdi-close</v-icon>
@@ -346,15 +346,15 @@
         <table class="border-top-none body-2">
           <tr>
             <td class="border-top-none py-1 d-flex">
-              <v-img :src="`./img/util/fuel.png`" height="20" width="20" />
-              <div class="ml-1 align-self-center">燃料補正</div>
+              <v-img :src="`./img/util/fuel.png`" height="20px" width="20px" />
+              <div class="ml-1 align-self-center">Fuel Penalty⠀⠀</div>
             </td>
             <td class="border-top-none pl-5">{{ fuelCorr }}</td>
           </tr>
           <tr>
             <td class="border-top-none py-1 d-flex">
               <v-img :src="`./img/util/ammo.png`" height="20" width="20" />
-              <div class="ml-1 align-self-center">弾薬補正</div>
+              <div class="ml-1 align-self-center">Ammo Penalty</div>
             </td>
             <td class="border-top-none pl-5">{{ ammoCorr }}</td>
           </tr>
@@ -630,10 +630,10 @@ export default Vue.extend({
         }
 
         if (airbase.battleTarget[0] === this.displayBattle) {
-          waveResults.push({ text: `基地${i + 1} 1波目`, result: airbase.resultWave1, baseIndex: i });
+          waveResults.push({ text: `Land Base ${i + 1} 1st Wave`, result: airbase.resultWave1, baseIndex: i });
         }
         if (airbase.battleTarget[1] === this.displayBattle) {
-          waveResults.push({ text: `基地${i + 1} 2波目`, result: airbase.resultWave2, baseIndex: i });
+          waveResults.push({ text: `Land Base ${i + 1} 2nd Wave`, result: airbase.resultWave2, baseIndex: i });
         }
       }
 
@@ -716,7 +716,7 @@ export default Vue.extend({
         const avg = needResult && result ? Math.round(result.loopSumEnemySupportAirPower) : 0;
         const enemyAirPower = avg ? `${avg}（ ${CommonCalc.getAirStatusBorder(avg).slice(0, 4).join(' / ')} ）` : '';
         rows.push({
-          name: `第${i + 1}艦隊`,
+          name: `Fleet ${i + 1}`,
           typeName: fleet.getSupportTypeName(),
           airPower: fleet.supportAirPower,
           enemyAirPower,
@@ -937,8 +937,8 @@ export default Vue.extend({
         this.tooltipY = e.clientY;
         this.enabledTooltip = true;
 
-        this.fuelCorr = fuel < 75 ? `回避項 -${75 - fuel}` : 'なし';
-        this.ammoCorr = ammo < 50 ? `ダメージ ${(ammo * 2) / 100}倍` : 'なし';
+        this.fuelCorr = fuel < 75 ? `Evasion -${75 - fuel}` : 'None';
+        this.ammoCorr = ammo < 50 ? `Damage x${(ammo * 2) / 100}` : 'None';
       }, 400);
     },
     clearTooltip() {

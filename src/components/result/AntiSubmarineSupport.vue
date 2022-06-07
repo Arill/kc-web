@@ -1,7 +1,7 @@
 <template>
   <div class="pa-2 container">
     <div class="d-flex">
-      <div class="caption">攻撃機選択</div>
+      <div class="caption">Select the plane</div>
       <div class="header-divider"></div>
     </div>
     <div class="select-item-container">
@@ -36,7 +36,7 @@
               <v-img :src="`./img/type/icon${item.data.iconTypeId}.png`" width="30" height="30" />
             </div>
             <div class="body-2 text-truncate item-name">{{ item.data.name }}</div>
-            <div class="ml-auto caption">対潜</div>
+            <div class="ml-auto caption">ASW</div>
             <div class="item-asw caption">{{ item.data.asw }}</div>
           </div>
         </div>
@@ -47,7 +47,7 @@
           min="0"
           max="999"
           v-model.number="slot"
-          label="搭載数"
+          label="Slot size"
           outlined
           dense
           :rules="[rules.counter]"
@@ -58,26 +58,26 @@
           min="0"
           max="999"
           v-model.number="asw"
-          label="対潜"
+          label="ASW"
           outlined
           dense
           :rules="[rules.counter]"
           @input="calculate()"
         ></v-text-field>
         <div class="d-flex">
-          <v-checkbox class="mt-0 pt-0" label="クリティカル" dense hide-details v-model="isCritical" @change="calculate()"></v-checkbox>
+          <v-checkbox class="mt-0 pt-0" label="Critical" dense hide-details v-model="isCritical" @change="calculate()"></v-checkbox>
         </div>
       </div>
     </div>
     <div class="d-flex">
-      <div class="caption">計算結果</div>
+      <div class="caption">Simulation results</div>
       <div class="header-divider"></div>
     </div>
     <div>
       <div class="d-flex flex-wrap">
-        <v-checkbox label="姫級表示" v-model="displayPrincess" dense hide-details @change="calculate()"></v-checkbox>
+        <v-checkbox label="Show Princesses" v-model="displayPrincess" dense hide-details @change="calculate()"></v-checkbox>
         <div class="ml-auto d-flex">
-          <div class="align-self-end caption">対潜火力(確率):</div>
+          <div class="align-self-end caption">ASW Damage (Probability):</div>
           <div class="d-flex align-self-end">
             <div v-for="(powerString, i) in powers" :key="`power${i}`" class="ml-3 caption">{{ powerString }}</div>
           </div>
@@ -88,12 +88,12 @@
           <thead>
             <tr>
               <td class="py-1 pl-1 text-left"></td>
-              <td class="td-value pr-1 py-1">耐久</td>
-              <td class="td-value pr-1">装甲</td>
-              <td class="no-wrap pr-1">ダメージ幅</td>
-              <td class="td-value pr-1">撃沈率</td>
-              <td class="td-value pr-1">大破率</td>
-              <td class="td-value pr-1">中破率</td>
+              <td class="td-value pr-1 py-1">HP</td>
+              <td class="td-value pr-1">Armor</td>
+              <td class="no-wrap pr-1">Damage Range</td>
+              <td class="td-value pr-1">Sinking Rate</td>
+              <td class="td-value pr-1">Taiha Rate</td>
+              <td class="td-value pr-1">Chuuha Rate</td>
             </tr>
           </thead>
           <tbody>

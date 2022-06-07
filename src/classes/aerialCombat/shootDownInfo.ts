@@ -39,7 +39,7 @@ export default class ShootDownInfo {
    * @param {boolean} isEnemy 敵側式フラグ
    * @param {boolean} isUnion 連合フラグ
    * @param {Formation} [formation] 陣形 未指定で単縦
-   * @param {AntiAirCutIn} [cutIn] 対空CI 未指定で不発
+   * @param {AntiAirCutIn} [cutIn] 対空CI 未指定でNone
    * @param {boolean} [isAirRaid] 任意空襲 未指定でなし
    * @param {AvoidType} [avoid] 任意回避補正 未指定でなし
    * @return {*}  {ShootDownStatus[]}
@@ -71,7 +71,7 @@ export default class ShootDownInfo {
     const fleetAntiAir = Math.floor((sumAntiAirBonus * aj1) / (isEnemy ? 1 : 1.3));
     // 対空CI変動ボーナス
     const cutInBonus1 = cutIn.rateCorr;
-    // 対空CI固定ボーナスA 敵側かつ不発なら0
+    // 対空CI固定ボーナスA 敵側かつNoneなら0
     const cutInBonusA = isEnemy && cutIn.id === 0 ? 0 : cutIn.fixCorrA;
     // 対空CI固定ボーナスB
     const cutInBonusB = cutIn.fixCorrB;

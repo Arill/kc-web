@@ -1,7 +1,7 @@
 <template>
   <v-card class="my-2 px-1 py-2">
     <div class="d-flex pb-1 flex-wrap">
-      <div class="pl-2 align-self-center">敵艦隊</div>
+      <div class="pl-2 align-self-center">Enemy Fleet</div>
       <v-spacer></v-spacer>
       <v-btn icon @click="resetFleetAll">
         <v-icon>mdi-trash-can-outline</v-icon>
@@ -27,7 +27,7 @@
     <div id="enemies-container" :class="{ captured: capturing }">
       <div class="d-flex mx-1 mt-3" v-if="!isDefense">
         <div class="align-self-center mr-3 pb-2" v-if="!capturing">
-          <v-btn color="primary" @click.stop="showWorldListContinuous">海域から一括入力</v-btn>
+          <v-btn color="primary" @click.stop="showWorldListContinuous">Batch Node Selection</v-btn>
         </div>
         <div class="align-self-center mr-4 pb-2" v-if="!capturing" v-show="battleInfo.battleCount > 1 && existsBattleAirbase">
           <v-tooltip bottom color="red" :disabled="!alertAirbaseTarget">
@@ -39,36 +39,36 @@
                 v-bind="attrs"
                 v-on="on"
               >
-                基地派遣先設定
+                Land Base destination
               </v-btn>
             </template>
-            <span>戦闘回数が変更されている可能性があります。派遣先を確認してください。</span>
+            <span>The number of Nodes may have changed. Please check the Land Base destinations.</span>
           </v-tooltip>
         </div>
         <div class="align-self-center mr-4" id="battle-count-select">
-          <v-select dense hide-details v-model="battleInfo.battleCount" :items="items" label="戦闘回数" @change="setInfo()"></v-select>
+          <v-select dense hide-details v-model="battleInfo.battleCount" :items="items" label="Number of Nodes" @change="setInfo()"></v-select>
         </div>
         <div class="align-self-center body-2" v-if="nodeString">
-          <span class="text--secondary mr-3">航路:</span>
+          <span class="text--secondary mr-3">Route:</span>
           <span>{{ nodeString }}</span>
         </div>
       </div>
       <div v-if="isDefense" class="d-flex flex-wrap air-power-info ma-1">
         <div>
           <v-chip class="mr-1" color="green" label outlined>
-            <span>確保:</span>
+            <span>AS+:</span>
             <span class="chip-value">{{ defenseAirPowerBorders[0] }}</span>
           </v-chip>
           <v-chip class="mr-1" color="light-green" label outlined>
-            <span>優勢:</span>
+            <span>AS:</span>
             <span class="chip-value">{{ defenseAirPowerBorders[1] }}</span>
           </v-chip>
           <v-chip class="mr-1" color="orange" label outlined>
-            <span>拮抗:</span>
+            <span>AP:</span>
             <span class="chip-value">{{ defenseAirPowerBorders[2] }}</span>
           </v-chip>
           <v-chip class="mr-1" color="deep-orange" label outlined>
-            <span>劣勢:</span>
+            <span>AD:</span>
             <span class="chip-value">{{ defenseAirPowerBorders[3] }}</span>
           </v-chip>
         </div>
@@ -334,7 +334,7 @@ export default Vue.extend({
       console.log(this.itemDialogTarget);
     },
     setEnemyFleet(fleet: EnemyFleet, isCoutinue = false) {
-      if (fleet.nodeName === '空襲' || this.isDefense) {
+      if (fleet.nodeName === 'Air Raid' || this.isDefense) {
         this.airbaseInfo.isDefense = true;
         // 空襲モード用敵編成に追加して終了
         this.setInfo({ info: this.battleInfo, airRaidFleet: fleet });

@@ -297,7 +297,7 @@ export default class CalcManager {
     result.loopSumEnemyAirPower = enemyAirPower;
 
     if (enemyAirPower <= 0) {
-      // 敵制空値がない場合は確保固定
+      // 敵制空値がない場合はAS+固定
       result.airState.value = AIR_STATE.KAKUHO;
       result.rates[0] = 1;
     } else if (airPower >= b0) {

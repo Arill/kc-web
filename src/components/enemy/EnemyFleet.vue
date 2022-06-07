@@ -1,20 +1,20 @@
 <template>
   <v-card class="ma-1 py-2">
     <div class="d-flex">
-      <div class="ml-2 align-self-center battle-title">{{ index + 1 }}戦目</div>
+      <div class="ml-2 align-self-center battle-title">Node {{ index + 1 }}</div>
       <div v-if="fleet.existUnknownEnemy" class="align-self-start ml-1">
         <v-tooltip bottom color="black">
           <template v-slot:activator="{ on, attrs }">
             <v-icon color="warning" v-bind="attrs" v-on="on">mdi-alert</v-icon>
           </template>
-          <div>搭載数が未確定の敵艦が含まれています。</div>
-          <div>表示制空値は目安のもので、正確な制空値ではありません。</div>
+          <div>Includes enemies with undiscovered Air Power values.</div>
+          <div>The displayed Air Power value is only an estimate and is not an accurate value.</div>
         </v-tooltip>
       </div>
       <v-spacer></v-spacer>
       <div v-if="capturing && fleet.nodeName" class="mx-3">{{ fleet.nodeName }}</div>
       <div class="align-self-center mr-1" v-if="!capturing">
-        <v-btn outlined small color="primary" @click.stop="showWorldList">海域選択</v-btn>
+        <v-btn outlined small color="primary" @click.stop="showWorldList">Select</v-btn>
       </div>
       <div class="align-self-center pr-1" v-if="existEnemy && !capturing">
         <v-btn color="info" icon small @click="clickedInfo()">
@@ -34,18 +34,18 @@
       </div>
     </div>
     <div class="d-flex mx-2">
-      <div class="caption text--secondary">艦隊防空:</div>
+      <div class="caption text--secondary">Flet AA:</div>
       <div class="ml-1 caption">{{ fleet.fleetAntiAir }}</div>
       <v-spacer></v-spacer>
-      <div class="mx-1 caption text--secondary">制空:</div>
+      <div class="mx-1 caption text--secondary">Air Power:</div>
       <div class="body-2 enemy-air-power">{{ fleet.fullAirPower }}</div>
       <div class="ml-1 caption" v-if="fleet.existUnknownEnemy">&#x3f;</div>
     </div>
     <div class="d-flex mx-2">
-      <div class="caption text--secondary">半径:</div>
+      <div class="caption text--secondary">Range:</div>
       <div class="ml-1 caption">{{ fleet.range }}</div>
       <v-spacer></v-spacer>
-      <div class="mx-1 caption text--secondary">基地制空:</div>
+      <div class="mx-1 caption text--secondary">LB Air Power:</div>
       <div class="body-2 enemy-air-power">{{ fleet.fullAirbaseAirPower }}</div>
       <div class="ml-1 caption" v-if="fleet.existUnknownEnemy">&#x3f;</div>
     </div>
@@ -72,8 +72,8 @@
           <div v-if="enemy.data.id > 0">
             <v-img :src="`./img/ship/${enemy.data.id}.png`" height="30" width="120"></v-img>
           </div>
-          <div v-if="enemy.data.id === 0" class="enemy-name text-truncate">敵艦選択</div>
-          <div class="mx-1 caption text--secondary">制空:</div>
+          <div v-if="enemy.data.id === 0" class="enemy-name text-truncate">Select a Ship</div>
+          <div class="mx-1 caption text--secondary">Air Power:</div>
           <div
             class="body-2 enemy-air-power"
             :class="{ 'orange--text text--darken-2': enemy.data.isUnknown }"

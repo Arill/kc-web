@@ -196,7 +196,7 @@ export default class Fleet {
       this.shootDownList.push(new ShootDownInfo(enabledShips, false, this.isUnion, cutIn, border, formation));
       this.shootDownListAirRaid.push(new ShootDownInfo(enabledShips, false, this.isUnion, cutIn, border, formation, true));
     }
-    // 対空CI不発データを挿入
+    // 対空CINoneデータを挿入
     const noCutinData = new ShootDownInfo(enabledShips, false, this.isUnion, new AntiAirCutIn(), 1, formation);
     this.shootDownList.push(noCutinData);
     this.shootDownListAirRaid.push(new ShootDownInfo(enabledShips, false, this.isUnion, new AntiAirCutIn(), 1, formation, true));

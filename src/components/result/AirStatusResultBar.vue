@@ -7,23 +7,23 @@
     <div class="align-self-center flex-grow-1">
       <div v-if="!noLabel" class="d-flex">
         <div class="status-bar-label" style="width: 10%">
-          <div>喪失</div>
+          <div>AI</div>
         </div>
         <div class="status-bar-divide"></div>
         <div class="status-bar-label" style="width: 10%">
-          <div>劣勢</div>
+          <div>AD</div>
         </div>
         <div class="status-bar-divide"></div>
         <div class="status-bar-label" style="width: 25%">
-          <div>拮抗</div>
+          <div>AP</div>
         </div>
         <div class="status-bar-divide"></div>
         <div class="status-bar-label" style="width: 45%">
-          <div>優勢</div>
+          <div>AS</div>
         </div>
         <div class="status-bar-divide"></div>
         <div class="status-bar-label" style="width: 10%">
-          <div>確保</div>
+          <div>AS+</div>
         </div>
       </div>
       <div>

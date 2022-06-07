@@ -106,7 +106,7 @@ export default class EnemyFleet {
   /** 敵随伴艦隊一覧(空の敵艦が除かれている) */
   public readonly escortEnemies: Enemy[];
 
-  /** stage2 対空CI不発時撃墜テーブル */
+  /** stage2 対空CINone時撃墜テーブル */
   public readonly noCutInStage2: ShootDownStatus[];
 
   /** stage2 撃墜テーブル */
@@ -250,7 +250,7 @@ export default class EnemyFleet {
 
       this.shootDownList.push(new ShootDownInfo(enabledEnemies, true, this.isUnion, cutIn, border, formation));
     }
-    // 対空CI不発データを挿入
+    // 対空CINoneデータを挿入
     const noCutInStage2 = new ShootDownInfo(enabledEnemies, true, this.isUnion, new AntiAirCutIn(), 1, formation);
     this.shootDownList.push(noCutInStage2);
 

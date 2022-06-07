@@ -45,7 +45,7 @@
       :class="{ 'text--secondary': isNoItem, 'is-special': item.data.isSpecial }"
       @click.stop="showItemList()"
     >
-      {{ isNoItem ? "未装備" : item.data.name }}
+      {{ isNoItem ? "Not Equipped" : item.data.name }}
     </div>
     <template v-if="!isNoItem && (!readonly || item.remodel > 0 || item.level > 0)">
       <!-- 改修値 -->

@@ -13,7 +13,7 @@
   >
     <template v-if="ship.isEmpty">
       <div class="empty-ship" v-ripple="{ class: 'info--text' }" @click.stop="showShipList">
-        <div class="align-self-center">艦娘選択</div>
+        <div class="align-self-center">Select a Ship</div>
       </div>
     </template>
     <template v-else>
@@ -71,14 +71,14 @@
               >
                 <template v-slot:activator="{ on, attrs }">
                   <div class="px-1 clickable-status" v-bind="attrs" v-on="on" v-ripple="{ class: 'info--text' }">
-                    <span class="text--secondary">運:</span>
+                    <span class="text--secondary">Luck:</span>
                     <span class="pl-1 font-weight-medium">{{ ship.luck }}</span>
                   </div>
                 </template>
                 <v-card class="pa-5">
                   <div class="d-flex mt-1">
-                    <v-btn class="mx-2" @click.stop="luck = ship.data.luck" :disabled="isNoShip">初期値</v-btn>
-                    <v-btn class="mx-2" @click.stop="luck = ship.data.maxLuck" color="primary" :disabled="isNoShip">最大値</v-btn>
+                    <v-btn class="mx-2" @click.stop="luck = ship.data.luck" :disabled="isNoShip">Default</v-btn>
+                    <v-btn class="mx-2" @click.stop="luck = ship.data.maxLuck" color="primary" :disabled="isNoShip">Maximum</v-btn>
                   </div>
                   <v-text-field
                     v-model.number="luck"
@@ -100,14 +100,14 @@
               >
                 <template v-slot:activator="{ on, attrs }">
                   <div class="px-1 clickable-status" v-bind="attrs" v-on="on" v-ripple="{ class: 'info--text' }">
-                    <span class="text--secondary">対空:</span>
+                    <span class="text--secondary">Anti-Air:</span>
                     <span class="pl-1 font-weight-medium">{{ ship.antiAir }}</span>
                   </div>
                 </template>
                 <v-card class="pa-5">
                   <div class="d-flex mt-1">
-                    <v-btn class="mx-2" @click.stop="antiAir = 0" :disabled="isNoShip">初期値</v-btn>
-                    <v-btn class="mx-2" @click.stop="antiAir = ship.data.antiAir" color="primary" :disabled="isNoShip">最大値</v-btn>
+                    <v-btn class="mx-2" @click.stop="antiAir = 0" :disabled="isNoShip">Default</v-btn>
+                    <v-btn class="mx-2" @click.stop="antiAir = ship.data.antiAir" color="primary" :disabled="isNoShip">Maximum</v-btn>
                   </div>
                   <v-text-field
                     v-model.number="antiAir"
@@ -121,7 +121,7 @@
             </div>
           </div>
           <div class="d-flex pl-1 clickable-status" v-ripple="{ class: 'info--text' }" @click.stop="showShipList">
-            <div class="ship-name text-truncate">{{ ship.data.name ? ship.data.name : "艦娘選択" }}</div>
+            <div class="ship-name text-truncate">{{ ship.data.name ? ship.data.name : "Select a Ship" }}</div>
           </div>
         </div>
         <!-- 艦娘解除 -->
@@ -132,48 +132,48 @@
         </div>
       </div>
       <div class="align-self-center caption pl-2">
-        <span class="text--secondary">撃墜:</span>
-        <span class="ml-1 font-weight-medium">{{ rateDownValue }}%,{{ fixDown }}機</span>
+        <span class="text--secondary">Shotdowns:</span>
+        <span class="ml-1 font-weight-medium">{{ rateDownValue }}%, {{ fixDown }} Planes</span>
         <template v-if="ship.hunshinRate">
-          <span class="ml-2 text--secondary">噴進:</span>
+          <span class="ml-2 text--secondary">AARB:</span>
           <span class="ml-1 font-weight-medium">{{ ship.hunshinRate.toFixed(1) }}%</span>
         </template>
-        <span class="ml-2 text--secondary">射程:</span>
+        <span class="ml-2 text--secondary">Range:</span>
         <span class="ml-1 font-weight-medium">{{ rangeText[ship.actualRange] }}</span>
         <template v-if="ship.data.minAsw || ship.enabledTSBK">
           <v-tooltip bottom color="black">
             <template v-slot:activator="{ on, attrs }">
               <span class="asw-view" v-bind="attrs" v-on="on">
-                <span class="ml-2 text--secondary mr-1">先制対潜:</span>
-                <span v-if="ship.enabledTSBK">可</span>
+                <span class="ml-2 text--secondary mr-1">OASW:</span>
+                <span v-if="ship.enabledTSBK">Enabled</span>
                 <span v-else>&times;</span>
               </span>
             </template>
             <table class="asw-table">
               <tr>
-                <td class="body-2">対潜先制爆雷攻撃：</td>
+                <td class="body-2">ASW：</td>
                 <td class="text-right pl-2">
-                  <span v-if="ship.enabledTSBK" class="blue--text text--lighten-2">可</span>
-                  <span v-else class="red--text text--lighten-1">不可</span>
+                  <span v-if="ship.enabledTSBK" class="blue--text text--lighten-2">Enabled</span>
+                  <span v-else class="red--text text--lighten-1">Disabled</span>
                 </td>
               </tr>
               <tr>
-                <td class="body-2">対潜<span class="ml-2 caption">艦娘</span>：</td>
+                <td class="body-2">ASW<span class="ml-2 caption">Shipgirl</span>：</td>
                 <td class="text-right">{{ ship.asw }}</td>
               </tr>
               <tr>
-                <td class="body-2">対潜<span class="ml-2 caption">装備</span>：</td>
+                <td class="body-2">ASW<span class="ml-2 caption">Equipment</span>：</td>
                 <td class="text-right">{{ ship.itemAsw }}</td>
               </tr>
               <tr>
-                <td class="body-2">対潜<span class="ml-2 caption">装備ボーナス</span>：</td>
+                <td class="body-2">ASW<span class="ml-2 caption">Equipment bonus</span>：</td>
                 <td class="text-right">{{ ship.itemBonusAsw }}</td>
               </tr>
               <tr class="border">
                 <td colspan="3"></td>
               </tr>
               <tr>
-                <td class="body-2">対潜<span class="ml-2 caption">合計</span>：</td>
+                <td class="body-2">ASW<span class="ml-2 caption">Total</span>：</td>
                 <td class="text-right">{{ ship.actualAsw }}</td>
               </tr>
             </table>
@@ -182,7 +182,7 @@
       </div>
       <div class="d-flex pr-1 pl-2 flex-wrap">
         <div class="align-self-center caption">
-          <span class="text--secondary">制空:</span>
+          <span class="text--secondary">Air Power:</span>
           <span class="ml-1 font-weight-medium">{{ ship.fullAirPower }}</span>
           <span class="ml-1 text--secondary">{{ airPowerDetail }}</span>
         </div>
@@ -193,7 +193,7 @@
                 <v-icon>mdi-sync</v-icon>
               </v-btn>
             </template>
-            <span>コンバート改造</span>
+            <span>Convert between remodels</span>
           </v-tooltip>
           <v-tooltip bottom color="black">
             <template v-slot:activator="{ on, attrs }">
@@ -201,7 +201,7 @@
                 <v-icon>mdi-upload</v-icon>
               </v-btn>
             </template>
-            <span>一時保存艦娘リスト</span>
+            <span>Save shipgirl temporarily</span>
           </v-tooltip>
           <v-tooltip bottom color="black">
             <template v-slot:activator="{ on, attrs }">
@@ -209,7 +209,7 @@
                 <v-icon>mdi-briefcase-variant</v-icon>
               </v-btn>
             </template>
-            <span>装備プリセット展開</span>
+            <span>Equipment Presets</span>
           </v-tooltip>
           <v-tooltip bottom color="black">
             <template v-slot:activator="{ on, attrs }">
@@ -217,7 +217,7 @@
                 <v-icon>mdi-eye</v-icon>
               </v-btn>
             </template>
-            <span>計算対象から省く</span>
+            <span>Hide from calculations</span>
           </v-tooltip>
           <v-btn icon small v-show="!ship.isActive" @click.stop="changeActive(true)">
             <v-icon>mdi-eye-off</v-icon>
@@ -510,7 +510,7 @@ export default Vue.extend({
     tooltipItem: new Item(),
     tooltipX: 0,
     tooltipY: 0,
-    rangeText: ['', '短', '中', '長', '超長', '超長+', '極', '極+', '極長', '極長+'],
+    rangeText: ['', 'Short', 'Medium', 'Long', 'Very Long', 'Very Long+', 'Super Long', 'Super Long+', 'Global', 'Global+'],
   }),
   computed: {
     ship(): Ship {

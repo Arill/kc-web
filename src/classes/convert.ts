@@ -942,35 +942,35 @@ export default class Convert {
   public static convertAttibuteString(value: string): string {
     switch (value) {
       case 'fire':
-        return '火力';
+        return 'FP';
       case 'torpedo':
-        return '雷装';
+        return 'TP';
       case 'bomber':
-        return '爆装';
+        return 'DB';
       case 'antiAir':
-        return '対空';
+        return 'AA';
       case 'accuracy':
-        return '命中';
+        return 'Acc';
       case 'scout':
-        return '索敵';
+        return 'LOS';
       case 'avoid':
-        return '回避';
+        return 'Evasion';
       case 'antiBomber':
-        return '対爆';
+        return 'Anti-Bomber';
       case 'interception':
-        return '迎撃';
+        return 'Interception';
       case 'armor':
-        return '装甲';
+        return 'Armor';
       case 'asw':
-        return '対潜';
+        return 'ASW';
       case 'range':
-        return '射程';
+        return 'Range';
       case 'radius':
-        return '半径';
+        return 'Radius';
       case 'cost':
-        return '配置コスト';
+        return 'Deployment Cost';
       case 'avoidId':
-        return '射撃回避';
+        return 'AA Resist';
       default:
         return value;
     }

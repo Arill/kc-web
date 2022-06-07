@@ -1,7 +1,7 @@
 <template>
   <v-card class="my-2 px-1 py-2">
     <div class="d-flex pb-1">
-      <div class="pl-2 align-self-center">自艦隊</div>
+      <div class="pl-2 align-self-center">Allied Fleet</div>
       <v-spacer></v-spacer>
       <v-tooltip bottom color="black">
         <template v-slot:activator="{ on, attrs }">
@@ -9,7 +9,7 @@
             <v-icon>mdi-wrench</v-icon>
           </v-btn>
         </template>
-        <span>装備一括設定</span>
+        <span>Change equipment settings in a batch</span>
       </v-tooltip>
       <v-tooltip bottom color="black">
         <template v-slot:activator="{ on, attrs }">
@@ -17,7 +17,7 @@
             <v-icon>mdi-trash-can-outline</v-icon>
           </v-btn>
         </template>
-        <span>全艦隊リセット</span>
+        <span>Discard all changes</span>
       </v-tooltip>
       <v-tooltip bottom color="black">
         <template v-slot:activator="{ on, attrs }">
@@ -25,7 +25,7 @@
             <v-icon>mdi-camera</v-icon>
           </v-btn>
         </template>
-        <span>スクリーンショットを保存</span>
+        <span>Save screenshot</span>
       </v-tooltip>
       <v-tooltip bottom color="black">
         <template v-slot:activator="{ on, attrs }">
@@ -33,7 +33,7 @@
             <v-icon>mdi-minus</v-icon>
           </v-btn>
         </template>
-        <span>最小化</span>
+        <span>Minimize</span>
       </v-tooltip>
     </div>
     <v-divider></v-divider>
@@ -41,7 +41,7 @@
       <v-menu v-model="levelMenu" :close-on-content-click="false" @input="onLevelMenuToggle">
         <template v-slot:activator="{ on, attrs }" v-ripple="{ class: 'info--text' }">
           <div class="form-input" v-bind="attrs" v-on="on">
-            <v-text-field type="number" dense hide-details label="司令部Lv" v-model.number="fleetInfo.admiralLevel" readonly></v-text-field>
+            <v-text-field type="number" dense hide-details label="HQ Lv" v-model.number="fleetInfo.admiralLevel" readonly></v-text-field>
           </div>
         </template>
         <v-card class="pa-5">
@@ -52,17 +52,17 @@
             min="1"
             hide-details
             type="number"
-            label="司令部Lv"
+            label="HQ Lv"
           ></v-text-field>
         </v-card>
       </v-menu>
       <div class="ml-4">
-        <v-checkbox label="連合艦隊" v-model="fleetInfo.isUnion" @change="changedInfo"></v-checkbox>
+        <v-checkbox label="Combined Fleet" v-model="fleetInfo.isUnion" @change="changedInfo"></v-checkbox>
       </div>
       <div class="ml-5">
         <v-select
           class="form-input"
-          label="陣形"
+          label="Formation"
           v-model="fleetInfo.mainFleet.formation"
           :items="formations"
           hide-details
@@ -86,11 +86,11 @@
         @dragstart.stop="dragStart($event)"
         @dragend.stop="dragEnd($event)"
       >
-        <template v-if="fleetInfo.isUnion && i === 1">主力艦隊</template>
-        <template v-else-if="fleetInfo.isUnion && i === 2">随伴艦隊</template>
-        <template v-else>第{{ i }}艦隊</template>
+        <template v-if="fleetInfo.isUnion && i === 1">Main Fleet</template>
+        <template v-else-if="fleetInfo.isUnion && i === 2">Escort Fleet</template>
+        <template v-else>Fleet {{ i }}</template>
       </v-tab>
-      <v-tab href="#gkcoi" @click="initializeOutput()">画像出力</v-tab>
+      <v-tab href="#gkcoi" @click="initializeOutput()">Save Image</v-tab>
       <v-tab href="#fleet4" disabled></v-tab>
     </v-tabs>
     <v-divider class="mx-2"></v-divider>
@@ -117,7 +117,7 @@
       </v-tab-item>
       <v-tab-item value="gkcoi" class="pa-2">
         <v-alert border="left" outlined dense type="warning" class="body-2">
-          本サイトでは対潜、索敵以外の装備ボーナスによる上昇値については未実装のため、出力画像に反映されません。ご注意ください。
+          Please be aware that the website does not implement bonuses to stats other than ASW and LOS, so others won't be visible in the output image.
         </v-alert>
         <div class="d-flex flex-wrap">
           <div class="gkcoi-select mr-3 my-1">
@@ -146,7 +146,7 @@
             <v-checkbox
               v-for="(check, i) in gkcoiOutputTarget"
               :key="i"
-              :label="`第${i + 1}艦隊`"
+              :label="`Fleet ${i + 1}`"
               dense
               hide-details
               v-model="gkcoiOutputTarget[i]"
@@ -157,10 +157,10 @@
         </div>
         <div class="d-flex">
           <div class="my-1 mr-3">
-            <v-btn @click="generateImage()" color="teal" :dark="enabledOutput" :disabled="!enabledOutput">出力</v-btn>
+            <v-btn @click="generateImage()" color="teal" :dark="enabledOutput" :disabled="!enabledOutput">Export</v-btn>
           </div>
           <div class="my-1" v-if="generatedCanvas">
-            <v-btn @click="saveImage()" color="success"><v-icon small>mdi-content-save</v-icon>保存</v-btn>
+            <v-btn @click="saveImage()" color="success"><v-icon small>mdi-content-save</v-icon>Save</v-btn>
             <a class="d-none" id="gkcoi-doownload" />
           </div>
         </div>
@@ -184,7 +184,7 @@
     <v-dialog v-model="tempShipListDialog" transition="scroll-x-transition" width="900">
       <v-card v-if="tempShipListDialog">
         <div class="d-flex pb-1 px-2 pt-2">
-          <div class="align-self-center ml-3">艦娘一時保存リスト</div>
+          <div class="align-self-center ml-3">Shipgirl Temporary Storage List</div>
           <v-spacer></v-spacer>
           <v-btn icon @click="tempShipListDialog = false">
             <v-icon>mdi-close</v-icon>
@@ -201,7 +201,7 @@
                 <div class="align-self-center ml-1 flex-grow-1">
                   <div class="d-flex">
                     <div class="caption blue--text">Lv: {{ tempShip.level }}</div>
-                    <div class="caption ml-2">制空: {{ tempShip.fullAirPower }}</div>
+                    <div class="caption ml-2">Air Power: {{ tempShip.fullAirPower }}</div>
                   </div>
                   <div class="d-flex flex-grow-1">
                     <div class="temp-ship-name">{{ tempShip.data.name }}</div>
@@ -216,7 +216,7 @@
                 <div class="item-img">
                   <v-img v-if="item.data.iconTypeId > 0" :src="`./img/type/icon${item.data.iconTypeId}.png`" height="30" width="30" />
                 </div>
-                <div class="temp-ship-item-name">{{ item.data.name ? item.data.name : "未装備" }}</div>
+                <div class="temp-ship-item-name">{{ item.data.name ? item.data.name : "Not Equipped" }}</div>
                 <div class="item-remodel" v-if="item.remodel">
                   <v-icon x-small color="teal accent-4">mdi-star</v-icon>
                   <span class="teal--text text--accent-4">{{ item.remodel }}</span>
@@ -225,15 +225,15 @@
             </v-card>
             <div>
               <v-btn color="primary" :disabled="!enabledPushTempShip" @click="pushTempShip()"
-                ><v-icon>mdi-tray-arrow-down</v-icon>リストへ追加
+                ><v-icon>mdi-tray-arrow-down</v-icon>Add to List
               </v-btn>
             </div>
           </div>
           <v-divider class="mt-3 mb-1"></v-divider>
           <div class="d-flex ml-2 mb-2">
             <div class="align-self-center d-flex">
-              <div class="body-2 align-self-end">一時保存済みリスト</div>
-              <div class="ml-3 align-self-end caption">※ クリックで展開</div>
+              <div class="body-2 align-self-end">Temporarily Saved List</div>
+              <div class="ml-3 align-self-end caption">※ Click to expand</div>
             </div>
             <div class="ml-auto">
               <v-btn color="error" :disabled="!tempShipList.length" @click="resetTempShipList()"
@@ -256,7 +256,7 @@
                 <div class="align-self-center ml-1 flex-grow-1">
                   <div class="d-flex">
                     <div class="caption blue--text">Lv: {{ temp.level }}</div>
-                    <div class="caption ml-2">制空: {{ temp.fullAirPower }}</div>
+                    <div class="caption ml-2">Air Power: {{ temp.fullAirPower }}</div>
                   </div>
                   <div class="d-flex flex-grow-1">
                     <div class="temp-ship-name">{{ temp.data.name }}</div>
@@ -285,7 +285,7 @@
     <v-dialog v-model="bulkUpdateDialog" transition="scroll-x-transition" width="600" @input="onBulkUpdateDialogToggle">
       <v-card>
         <div class="d-flex pt-2 pb-1 pr-2">
-          <div class="align-self-center ml-3">装備一括設定</div>
+          <div class="align-self-center ml-3">Change equipment settings in batch</div>
           <v-spacer></v-spacer>
           <v-btn icon @click="bulkUpdateDialog = false">
             <v-icon>mdi-close</v-icon>
@@ -295,7 +295,7 @@
         <div class="px-5 pt-2 pb-5">
           <div>
             <div class="d-flex">
-              <div class="caption">適用対象</div>
+              <div class="caption">Target equipment</div>
               <div class="header-divider"></div>
             </div>
             <div class="caption">選択されている艦隊の全艦娘に対し、下記の設定を適用します。</div>
@@ -343,7 +343,7 @@
                   <v-btn v-bind="attrs" v-on="on" outlined @click="setSlot(1)" block color="red">1機</v-btn>
                 </template>
                 <div class="body-2">
-                  <div><span class="red--text">制空権喪失</span>において、stage1被撃墜数が0となる最大機数</div>
+                  <div><span class="red--text">制空権AI</span>において、stage1被撃墜数が0となる最大機数</div>
                 </div>
               </v-tooltip>
             </div>
@@ -353,7 +353,7 @@
                   <v-btn v-bind="attrs" v-on="on" outlined @click="setSlot(2)" block color="orange darken-4">2機</v-btn>
                 </template>
                 <div class="body-2">
-                  <div><span class="orange--text">航空劣勢</span>において、stage1被撃墜数が0となる最大機数</div>
+                  <div><span class="orange--text">AD</span>において、stage1被撃墜数が0となる最大機数</div>
                 </div>
               </v-tooltip>
             </div>
@@ -363,7 +363,7 @@
                   <v-btn v-bind="attrs" v-on="on" outlined @click="setSlot(3)" block color="yellow darken-4">3機</v-btn>
                 </template>
                 <div class="body-2">
-                  <div><span class="yellow--text">航空拮抗</span>において、stage1被撃墜数が0となる最大機数</div>
+                  <div><span class="yellow--text">航空AP</span>において、stage1被撃墜数が0となる最大機数</div>
                 </div>
               </v-tooltip>
             </div>
@@ -373,7 +373,7 @@
                   <v-btn v-bind="attrs" v-on="on" outlined @click="setSlot(5)" block color="light-green">5機</v-btn>
                 </template>
                 <div class="body-2">
-                  <div><span class="light-green--text">航空優勢</span>において、stage1被撃墜数が0となる最大機数</div>
+                  <div><span class="light-green--text">AS</span>において、stage1被撃墜数が0となる最大機数</div>
                 </div>
               </v-tooltip>
             </div>
@@ -383,7 +383,7 @@
                   <v-btn v-bind="attrs" v-on="on" outlined @click="setSlot(17)" block color="success">17機</v-btn>
                 </template>
                 <div class="body-2">
-                  <div><span class="success--text">制空権確保</span>において、stage1被撃墜数が0となる最大機数</div>
+                  <div><span class="success--text">AS+</span>において、stage1被撃墜数が0となる最大機数</div>
                 </div>
               </v-tooltip>
             </div>

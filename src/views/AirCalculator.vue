@@ -1,17 +1,17 @@
 <template>
   <div class="mb-5" @dragover.prevent @drop="dropItem">
     <div class="minimize-group">
-      <v-btn class="mr-2" small v-if="!sortMode && setting.isMinimizedAirbase" @click="toggleMinimizeAirbase(false)">基地航空隊</v-btn>
-      <v-btn class="mr-2" small v-if="!sortMode && setting.isMinimizedFleet" @click="toggleMinimizeFleet(false)">自艦隊</v-btn>
-      <v-btn class="mr-2" small v-if="!sortMode && setting.isMinimizedEnemy" @click="toggleMinimizeEnemy(false)">敵艦隊</v-btn>
-      <v-btn class="mr-2" small v-if="!sortMode && setting.isMinimizedResult" @click="toggleMinimizeResult(false)">計算結果</v-btn>
-      <v-btn class="ml-auto" small v-if="!sortMode" @click="startContentOrder" color="primary">順序入替</v-btn>
-      <v-btn class="ml-auto" small v-if="sortMode" @click="commitContentOrder" color="primary">入替完了</v-btn>
-      <v-btn class="ml-2" dark small v-if="sortMode" @click="cancelContentOrder" color="secondary">キャンセル</v-btn>
+      <v-btn class="mr-2" small v-if="!sortMode && setting.isMinimizedAirbase" @click="toggleMinimizeAirbase(false)">Land Base Squadrons</v-btn>
+      <v-btn class="mr-2" small v-if="!sortMode && setting.isMinimizedFleet" @click="toggleMinimizeFleet(false)">Allied Fleet</v-btn>
+      <v-btn class="mr-2" small v-if="!sortMode && setting.isMinimizedEnemy" @click="toggleMinimizeEnemy(false)">Enemy Fleet</v-btn>
+      <v-btn class="mr-2" small v-if="!sortMode && setting.isMinimizedResult" @click="toggleMinimizeResult(false)">Simulation Results</v-btn>
+      <v-btn class="ml-auto" small v-if="!sortMode" @click="startContentOrder" color="primary">Change Order</v-btn>
+      <v-btn class="ml-auto" small v-if="sortMode" @click="commitContentOrder" color="primary">Accept</v-btn>
+      <v-btn class="ml-2" dark small v-if="sortMode" @click="cancelContentOrder" color="secondary">Cancel</v-btn>
     </div>
     <draggable handle=".content-frame" animation="150" :disabled="!sortMode" id="content-container" :class="{ 'sort-mode': sortMode }">
       <div id="airbase-content" class="content-frame" v-show="sortMode || !setting.isMinimizedAirbase">
-        <v-card v-if="sortMode" class="sort-container">基地航空隊</v-card>
+        <v-card v-if="sortMode" class="sort-container">Land Base Squadrons</v-card>
         <airbase-all
           v-else
           v-model="calcManager.airbaseInfo"
@@ -21,7 +21,7 @@
         />
       </div>
       <div id="fleet-content" class="content-frame" v-show="sortMode || (!calcManager.isDefense && !setting.isMinimizedFleet)">
-        <v-card v-if="sortMode" class="sort-container">自艦隊</v-card>
+        <v-card v-if="sortMode" class="sort-container">Allied Fleet</v-card>
         <fleet-all
           v-else
           v-model="calcManager.fleetInfo"
@@ -31,7 +31,7 @@
         />
       </div>
       <div id="enemy-content" class="content-frame" v-show="sortMode || !setting.isMinimizedEnemy">
-        <v-card v-if="sortMode" class="sort-container">敵艦隊</v-card>
+        <v-card v-if="sortMode" class="sort-container">Enemy Fleet</v-card>
         <enemy-fleet-all
           v-else
           v-model="calcManager.battleInfo"
@@ -42,7 +42,7 @@
         />
       </div>
       <div id="result-content" class="content-frame" v-show="sortMode || !setting.isMinimizedResult">
-        <v-card v-if="sortMode" class="sort-container">計算結果</v-card>
+        <v-card v-if="sortMode" class="sort-container">Simulation Results</v-card>
         <main-result
           v-else
           v-model="calcManager"
@@ -333,11 +333,11 @@ export default Vue.extend({
       }
 
       if (count > 0) {
-        this.$emit('inform', `計算が完了しました。(+${count.toLocaleString()}回)`);
+        this.$emit('inform', `Simulation complete (+${count.toLocaleString()} times)`);
       }
     },
     startContentOrder() {
-      this.$emit('inform', 'ドラッグ & ドロップで入力欄を好きな順に並べ替え、入替完了を押してください。');
+      this.$emit('inform', 'Rearrange the panels as you\'d like, then press Accept.');
       this.sortMode = true;
 
       const contents = document.querySelectorAll('#content-container .content-frame');
@@ -362,7 +362,7 @@ export default Vue.extend({
         }
       }
 
-      this.$emit('inform', '入力欄を入れ替えました。');
+      this.$emit('inform', 'Changes applied.');
       this.$store.dispatch('updateSetting', this.setting);
     },
     toggleMinimizeAirbase(isMinimized: boolean) {

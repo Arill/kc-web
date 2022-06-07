@@ -69,19 +69,19 @@
               </div>
               <div class="ml-2">
                 <v-chip class="mr-1" color="green" label outlined>
-                  <span>確保:</span>
+                  <span>AS+:</span>
                   <span class="chip-value">{{ fleet.fullAirbaseBorders[0] }}</span>
                 </v-chip>
                 <v-chip class="mr-1" color="light-green" label outlined>
-                  <span>優勢:</span>
+                  <span>AS:</span>
                   <span class="chip-value">{{ fleet.fullAirbaseBorders[1] }}</span>
                 </v-chip>
                 <v-chip class="mr-1" color="orange" label outlined>
-                  <span>拮抗:</span>
+                  <span>AP:</span>
                   <span class="chip-value">{{ fleet.fullAirbaseBorders[2] }}</span>
                 </v-chip>
                 <v-chip class="mr-1" color="deep-orange" label outlined>
-                  <span>劣勢:</span>
+                  <span>AD:</span>
                   <span class="chip-value">{{ fleet.fullAirbaseBorders[3] }}</span>
                 </v-chip>
               </div>
@@ -91,19 +91,19 @@
               <div class="mx-3">{{ fleet.fullAirPower }}</div>
               <div>
                 <v-chip class="mr-1" color="green" label outlined>
-                  <span>確保:</span>
+                  <span>AS+:</span>
                   <span class="chip-value">{{ fleet.fullBorders[0] }}</span>
                 </v-chip>
                 <v-chip class="mr-1" color="light-green" label outlined>
-                  <span>優勢:</span>
+                  <span>AS:</span>
                   <span class="chip-value">{{ fleet.fullBorders[1] }}</span>
                 </v-chip>
                 <v-chip class="mr-1" color="orange" label outlined>
-                  <span>拮抗:</span>
+                  <span>AP:</span>
                   <span class="chip-value">{{ fleet.fullBorders[2] }}</span>
                 </v-chip>
                 <v-chip class="mr-1" color="deep-orange" label outlined>
-                  <span>劣勢:</span>
+                  <span>AD:</span>
                   <span class="chip-value">{{ fleet.fullBorders[3] }}</span>
                 </v-chip>
               </div>
@@ -447,8 +447,8 @@ export default Vue.extend({
 
       // 空襲をてっぺんに
       cellItems.sort((a, b) => {
-        if (a.text === '空襲' && b.text !== '空襲') return -1;
-        if (b.text === '空襲' && a.text !== '空襲') return 1;
+        if (a.text === '空襲' && b.text !== 'Air Raid') return -1;
+        if (b.text === '空襲' && a.text !== 'Air Raid') return 1;
         return 0;
       });
       this.cellItems = cellItems;

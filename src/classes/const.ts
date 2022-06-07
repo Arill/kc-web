@@ -119,12 +119,12 @@ export default class Const {
  * @memberof Const
  */
   public static readonly AIR_STATUS = [
-    { text: '確保', value: AIR_STATE.KAKUHO, color: 'green' },
-    { text: '優勢', value: AIR_STATE.YUSEI, color: 'light-green' },
-    { text: '拮抗', value: AIR_STATE.KINKO, color: 'yellow' },
-    { text: '劣勢', value: AIR_STATE.RESSEI, color: 'deep-orange' },
-    { text: '喪失', value: AIR_STATE.SOSHITSU, color: 'red' },
-    { text: '不発', value: AIR_STATE.NONE, color: 'secondary' },
+    { text: 'AS+', value: AIR_STATE.KAKUHO, color: 'green' },
+    { text: 'AS', value: AIR_STATE.YUSEI, color: 'light-green' },
+    { text: 'AP', value: AIR_STATE.KINKO, color: 'yellow' },
+    { text: 'AD', value: AIR_STATE.RESSEI, color: 'deep-orange' },
+    { text: 'AI', value: AIR_STATE.SOSHITSU, color: 'red' },
+    { text: 'None', value: AIR_STATE.NONE, color: 'secondary' },
   ];
 
   /**
@@ -133,9 +133,9 @@ export default class Const {
    * @memberof Const
    */
   public static readonly AB_MODE_ITEMS = [
-    { text: '出撃', value: AB_MODE.BATTLE },
-    { text: '防空', value: AB_MODE.DEFFENSE },
-    { text: '待機', value: AB_MODE.WAIT },
+    { text: 'Sortie', value: AB_MODE.BATTLE },
+    { text: 'Defense', value: AB_MODE.DEFFENSE },
+    { text: 'Standby', value: AB_MODE.WAIT },
   ];
 
   public static readonly PLANE_TYPES = [6, 7, 8, 9, 10, 11, 41, 45, 47, 48, 49, 53, 57];
@@ -165,56 +165,56 @@ export default class Const {
   public static readonly ENABLED_ASW_SUPPORT = [7, 8, 10, 11, 45, 41, 25, 26];
 
   public static readonly ITEM_API_TYPE = [
-    { id: 6, name: '艦上戦闘機', sortKey: ['antiAir', 'avoid', 'accuracy', 'scout', 'radius', 'cost'] },
-    { id: 7, name: '艦上爆撃機', sortKey: ['bomber', 'antiAir', 'accuracy', 'asw', 'avoid', 'scout', 'radius', 'avoidId', 'cost'] },
-    { id: 8, name: '艦上攻撃機', sortKey: ['torpedo', 'antiAir', 'accuracy', 'asw', 'avoid', 'scout', 'radius', 'avoidId', 'cost'] },
-    { id: 9, name: '艦上偵察機', sortKey: ['scout', 'accuracy', 'avoid', 'antiAir', 'radius', 'avoidId', 'cost'] },
-    { id: 57, name: '噴式戦闘爆撃機', sortKey: ['bomber', 'antiAir', 'accuracy', 'avoid', 'scout', 'radius', 'avoidId', 'cost'] },
-    { id: 10, name: '水上偵察機', sortKey: ['scout', 'accuracy', 'avoid', 'antiAir', 'radius', 'avoidId', 'cost'] },
-    { id: 11, name: '水上爆撃機', sortKey: ['bomber', 'antiAir', 'accuracy', 'avoid', 'scout', 'radius', 'avoidId', 'cost'] },
-    { id: 45, name: '水上戦闘機', sortKey: ['antiAir', 'avoid', 'accuracy', 'scout', 'radius', 'cost'] },
-    { id: 41, name: '大型飛行艇', sortKey: ['scout', 'accuracy', 'avoid', 'antiAir', 'radius', 'avoidId', 'cost'] },
-    { id: 47, name: '陸上攻撃機', sortKey: ['torpedo', 'bomber', 'antiAir', 'asw', 'accuracy', 'avoid', 'scout', 'radius', 'avoidId', 'cost'] },
-    { id: 53, name: '大型陸上機', sortKey: ['torpedo', 'bomber', 'antiAir', 'accuracy', 'avoid', 'scout', 'radius', 'avoidId', 'cost'] },
-    { id: 48, name: '局地戦闘機', sortKey: ['antiAir', 'antiBomber', 'interception', 'radius', 'cost'] },
-    { id: 49, name: '陸上偵察機', sortKey: ['scout', 'accuracy', 'avoid', 'antiAir', 'radius', 'avoidId', 'cost'] },
-    { id: 1, name: '小口径主砲', sortKey: ['fire', 'accuracy', 'antiAir', 'armor', 'range'] },
-    { id: 2, name: '中口径主砲', sortKey: ['fire', 'accuracy', 'antiAir', 'armor', 'range'] },
-    { id: 3, name: '大口径主砲', sortKey: ['fire', 'accuracy', 'antiAir', 'armor', 'range'] },
-    { id: 4, name: '副砲', sortKey: ['fire', 'accuracy', 'antiAir', 'armor', 'range'] },
-    { id: 5, name: '魚雷', sortKey: ['torpedo', 'accuracy', 'armor'] },
-    { id: 12, name: '小型電探', sortKey: ['antiAir', 'accuracy', 'scout', 'fire', 'armor'] },
-    { id: 13, name: '大型電探', sortKey: ['antiAir', 'accuracy', 'scout', 'fire', 'armor'] },
-    { id: 14, name: 'ソナー', sortKey: ['asw', 'accuracy', 'scout'] },
-    { id: 15, name: '爆雷', sortKey: ['asw', 'accuracy'] },
-    { id: 17, name: '機関部強化' },
-    { id: 18, name: '対空強化弾' },
-    { id: 19, name: '対艦強化弾' },
-    { id: 21, name: '対空機銃', sortKey: ['antiAir', 'accuracy', 'fire', 'armor', 'avoid'] },
-    { id: 22, name: '特殊潜航艇', sortKey: ['torpedo', 'accuracy', 'avoid', 'scout'] },
-    { id: 23, name: '応急修理要員' },
-    { id: 24, name: '上陸用舟艇', sortKey: ['fire', 'antiAir', 'armor', 'avoid', 'scout', 'tp'] },
-    { id: 25, name: 'オートジャイロ' },
-    { id: 26, name: '対潜哨戒機' },
-    { id: 27, name: '追加装甲(中型)' },
-    { id: 28, name: '追加装甲(大型)' },
-    { id: 29, name: '探照灯' },
-    { id: 30, name: '簡易輸送部材' },
-    { id: 31, name: '艦艇修理施設' },
-    { id: 32, name: '潜水艦魚雷', sortKey: ['torpedo', 'accuracy', 'avoid'] },
-    { id: 33, name: '照明弾' },
-    { id: 34, name: '司令部施設' },
-    { id: 35, name: '航空要員' },
-    { id: 36, name: '高射装置' },
-    { id: 37, name: '対地装備' },
-    { id: 39, name: '水上艦要員' },
-    { id: 40, name: '大型ソナー' },
-    { id: 42, name: '大型探照灯' },
-    { id: 43, name: '戦闘糧食' },
-    { id: 44, name: '補給物資' },
-    { id: 46, name: '特型内火艇' },
-    { id: 50, name: '輸送機材' },
-    { id: 51, name: '潜水艦装備' },
+    { id: 6, name: 'Carrier-based Fighter', sortKey: ['antiAir', 'avoid', 'accuracy', 'scout', 'radius', 'cost'] },
+    { id: 7, name: 'Carrier-based Dive Bomber', sortKey: ['bomber', 'antiAir', 'accuracy', 'asw', 'avoid', 'scout', 'radius', 'avoidId', 'cost'] },
+    { id: 8, name: 'Carrier-based Torpedo Bomber', sortKey: ['torpedo', 'antiAir', 'accuracy', 'asw', 'avoid', 'scout', 'radius', 'avoidId', 'cost'] },
+    { id: 9, name: 'Carrier-based Recon Aircraft', sortKey: ['scout', 'accuracy', 'avoid', 'antiAir', 'radius', 'avoidId', 'cost'] },
+    { id: 57, name: 'Jet-type Aircraft', sortKey: ['bomber', 'antiAir', 'accuracy', 'avoid', 'scout', 'radius', 'avoidId', 'cost'] },
+    { id: 10, name: 'Seaplane Recon', sortKey: ['scout', 'accuracy', 'avoid', 'antiAir', 'radius', 'avoidId', 'cost'] },
+    { id: 11, name: 'Seaplane Bomber', sortKey: ['bomber', 'antiAir', 'accuracy', 'avoid', 'scout', 'radius', 'avoidId', 'cost'] },
+    { id: 45, name: 'Seaplane Fighter', sortKey: ['antiAir', 'avoid', 'accuracy', 'scout', 'radius', 'cost'] },
+    { id: 41, name: 'Large Flying Boat', sortKey: ['scout', 'accuracy', 'avoid', 'antiAir', 'radius', 'avoidId', 'cost'] },
+    { id: 47, name: 'Land-based Bomber', sortKey: ['torpedo', 'bomber', 'antiAir', 'asw', 'accuracy', 'avoid', 'scout', 'radius', 'avoidId', 'cost'] },
+    { id: 53, name: 'Heavy Bomber', sortKey: ['torpedo', 'bomber', 'antiAir', 'accuracy', 'avoid', 'scout', 'radius', 'avoidId', 'cost'] },
+    { id: 48, name: 'Land-based Fighter', sortKey: ['antiAir', 'antiBomber', 'interception', 'radius', 'cost'] },
+    { id: 49, name: 'Land-based Recon Aircraft', sortKey: ['scout', 'accuracy', 'avoid', 'antiAir', 'radius', 'avoidId', 'cost'] },
+    { id: 1, name: 'Small Caliber Gun', sortKey: ['fire', 'accuracy', 'antiAir', 'armor', 'range'] },
+    { id: 2, name: 'Medium Caliber Gun', sortKey: ['fire', 'accuracy', 'antiAir', 'armor', 'range'] },
+    { id: 3, name: 'Large Caliber Gun', sortKey: ['fire', 'accuracy', 'antiAir', 'armor', 'range'] },
+    { id: 4, name: 'Secondary Gun', sortKey: ['fire', 'accuracy', 'antiAir', 'armor', 'range'] },
+    { id: 5, name: 'Torpedo', sortKey: ['torpedo', 'accuracy', 'armor'] },
+    { id: 12, name: 'Small Radar', sortKey: ['antiAir', 'accuracy', 'scout', 'fire', 'armor'] },
+    { id: 13, name: 'Large Radar', sortKey: ['antiAir', 'accuracy', 'scout', 'fire', 'armor'] },
+    { id: 14, name: 'Sonar', sortKey: ['asw', 'accuracy', 'scout'] },
+    { id: 15, name: 'Depth Charge', sortKey: ['asw', 'accuracy'] },
+    { id: 17, name: 'Boiler' },
+    { id: 18, name: 'Anti-Air Shell' },
+    { id: 19, name: 'Armor Piercing Shell' },
+    { id: 21, name: 'Anti-Aircraft Gun', sortKey: ['antiAir', 'accuracy', 'fire', 'armor', 'avoid'] },
+    { id: 22, name: 'Midget Submarine', sortKey: ['torpedo', 'accuracy', 'avoid', 'scout'] },
+    { id: 23, name: 'Emergency Repair Personnel' },
+    { id: 24, name: 'Landing Craft', sortKey: ['fire', 'antiAir', 'armor', 'avoid', 'scout', 'tp'] },
+    { id: 25, name: 'Autogyro' },
+    { id: 26, name: 'ASW Patrol Aircraft' },
+    { id: 27, name: 'Anti-torpedo Bulge (Medium)' },
+    { id: 28, name: 'Anti-torpedo Bulge (Large)' },
+    { id: 29, name: 'Searchlight' },
+    { id: 30, name: 'Drum Canister' },
+    { id: 31, name: 'Ship Repair Facility' },
+    { id: 32, name: 'Submarine Torpedo', sortKey: ['torpedo', 'accuracy', 'avoid'] },
+    { id: 33, name: 'Flare' },
+    { id: 34, name: 'Fleet Command Facility' },
+    { id: 35, name: 'Aviation Personnel' },
+    { id: 36, name: 'AAFD' },
+    { id: 37, name: 'Anti-Ground Rocket' },
+    { id: 39, name: 'Skilled Lookouts' },
+    { id: 40, name: 'Large Sonar' },
+    { id: 42, name: 'Large Searchlight' },
+    { id: 43, name: 'Combat Ration' },
+    { id: 44, name: 'Underway Replenishmnet' },
+    { id: 46, name: 'Type 2 KaMi Tank' },
+    { id: 50, name: 'Transport Equipment' },
+    { id: 51, name: 'Submarine Equipment' },
   ];
 
   /**
@@ -513,16 +513,16 @@ export default class Const {
    * @memberof Const
    */
   public static readonly FORMATIONS: Formation[] = [
-    { text: '単縦陣', value: FORMATION.LINE_AHEAD, correction: 1.0 },
-    { text: '複縦陣', value: FORMATION.DOUBLE_LINE, correction: 1.2 },
-    { text: '輪形陣', value: FORMATION.DIAMOND, correction: 1.6 },
-    { text: '梯形陣', value: FORMATION.ECHELON, correction: 1.0 },
-    { text: '単横陣', value: FORMATION.LINE_ABREAST, correction: 1.0 },
-    { text: '警戒陣', value: FORMATION.VANGUARD, correction: 1.1 },
-    { text: '第一警戒', value: FORMATION.FORMATION1, correction: 1.1 },
-    { text: '第二警戒', value: FORMATION.FORMATION2, correction: 1.0 },
-    { text: '第三警戒', value: FORMATION.FORMATION3, correction: 1.5 },
-    { text: '第四警戒', value: FORMATION.FORMATION4, correction: 1.0 },
+    { text: 'Line Ahead', value: FORMATION.LINE_AHEAD, correction: 1.0 },
+    { text: 'Double Line', value: FORMATION.DOUBLE_LINE, correction: 1.2 },
+    { text: 'Diamond', value: FORMATION.DIAMOND, correction: 1.6 },
+    { text: 'Echelon', value: FORMATION.ECHELON, correction: 1.0 },
+    { text: 'Line Abreast', value: FORMATION.LINE_ABREAST, correction: 1.0 },
+    { text: 'Vanguard', value: FORMATION.VANGUARD, correction: 1.1 },
+    { text: 'Cruising Formation 1 (ASW)', value: FORMATION.FORMATION1, correction: 1.1 },
+    { text: 'Cruising Formation 2 (Double Line)', value: FORMATION.FORMATION2, correction: 1.0 },
+    { text: 'Cruising Formation 3 (Diamond)', value: FORMATION.FORMATION3, correction: 1.5 },
+    { text: 'Cruising Formation 4 (Line Ahead)', value: FORMATION.FORMATION4, correction: 1.0 },
   ];
 
   /**
@@ -531,12 +531,12 @@ export default class Const {
  * @memberof Const
  */
   public static readonly SUPPORTS = [
-    { text: '支援射撃', value: SUPPORT_TYPE.SHELLING },
-    { text: '航空支援', value: SUPPORT_TYPE.AIRSTRIKE },
-    { text: '対潜支援哨戒', value: SUPPORT_TYPE.ANTI_SUBMARINE },
-    { text: '支援長距離雷撃', value: SUPPORT_TYPE.LONG_RANGE_TORPEDO },
-    { text: '支援不可(要駆逐2)', value: SUPPORT_TYPE.NOT_FOUND_DD },
-    { text: '不発', value: SUPPORT_TYPE.NONE },
+    { text: 'Shelling Support', value: SUPPORT_TYPE.SHELLING },
+    { text: 'Aerial Support', value: SUPPORT_TYPE.AIRSTRIKE },
+    { text: 'ASW Support', value: SUPPORT_TYPE.ANTI_SUBMARINE },
+    { text: 'Torpedo Support', value: SUPPORT_TYPE.LONG_RANGE_TORPEDO },
+    { text: 'No Support (2 DD required)', value: SUPPORT_TYPE.NOT_FOUND_DD },
+    { text: 'None', value: SUPPORT_TYPE.NONE },
   ];
 
   /**
@@ -616,13 +616,13 @@ export default class Const {
    * @memberof Const
    */
   public static readonly CELL_TYPES = [
-    { text: '通常', value: CELL_TYPE.NORMAL },
-    { text: '連合', value: CELL_TYPE.GRAND },
-    { text: '空襲', value: CELL_TYPE.AIR_RAID },
-    { text: '夜戦', value: CELL_TYPE.NIGHT },
-    { text: '重爆', value: CELL_TYPE.HIGH_AIR_RAID },
-    { text: '航空戦', value: CELL_TYPE.AERIAL_COMBAT },
-    { text: '超重爆', value: CELL_TYPE.SUPER_HIGH_AIR_RAID },
+    { text: 'Single Fleet', value: CELL_TYPE.NORMAL },
+    { text: 'Combined Fleet', value: CELL_TYPE.GRAND },
+    { text: 'Air Raid', value: CELL_TYPE.AIR_RAID },
+    { text: 'Night Battle', value: CELL_TYPE.NIGHT },
+    { text: 'High Altitude Raid', value: CELL_TYPE.HIGH_AIR_RAID },
+    { text: 'Aerial Combat', value: CELL_TYPE.AERIAL_COMBAT },
+    { text: 'Super Heavy Bomb Raid', value: CELL_TYPE.SUPER_HIGH_AIR_RAID },
   ];
 
   /**
@@ -665,22 +665,22 @@ export default class Const {
    */
   public static readonly AVOID_TYPE: AvoidType[] = [
     {
-      value: 0, text: 'なし', c1: 1, c2: 1, c3: 1, c4: 1,
+      value: 0, text: 'None', c1: 1, c2: 1, c3: 1, c4: 1,
     },
     {
-      value: 1, text: '弱', c1: 0.6, c2: 1, c3: 1, c4: 1,
+      value: 1, text: 'Weak', c1: 0.6, c2: 1, c3: 1, c4: 1,
     },
     {
-      value: 2, text: '中', c1: 0.6, c2: 0.7, c3: 1, c4: 1,
+      value: 2, text: 'Moderate', c1: 0.6, c2: 0.7, c3: 1, c4: 1,
     },
     {
-      value: 3, text: '強', c1: 0.5, c2: 0.7, c3: 1, c4: 1,
+      value: 3, text: 'Strong', c1: 0.5, c2: 0.7, c3: 1, c4: 1,
     },
     {
-      value: 4, text: '超', c1: 0.5, c2: 0.5, c3: 1, c4: 1,
+      value: 4, text: 'Massive', c1: 0.5, c2: 0.5, c3: 1, c4: 1,
     },
     {
-      value: Const.MANUAL_AVOID, text: '任意', c1: 1, c2: 1, c3: 1, c4: 1,
+      value: Const.MANUAL_AVOID, text: 'Any', c1: 1, c2: 1, c3: 1, c4: 1,
     },
   ];
 
@@ -691,7 +691,7 @@ export default class Const {
    */
   public static readonly ANTIAIR_CUTIN = [
     {
-      id: 0, text: '不発', rateBonus: 1, c1: 1, c2: 0, rate: 100, remarks: '',
+      id: 0, text: 'None', rateBonus: 1, c1: 1, c2: 0, rate: 100, remarks: '',
     },
     {
       id: 1, text: '1種', rateBonus: 1.7, c1: 3, c2: 5, rate: 65, remarks: '秋月型',
