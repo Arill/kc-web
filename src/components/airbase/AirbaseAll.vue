@@ -68,11 +68,11 @@
       </div>
       <div class="d-flex ml-3 mb-2" v-if="airbaseInfo.isDefense">
         <template v-if="isNormalAirRaidMode">
-          <div class="align-self-center text--secondary body-2">防空時制空値:</div>
+          <div class="align-self-center text--secondary body-2">Defense Value:</div>
           <div class="align-self-center ml-1">{{ airbaseInfo.defenseAirPower }}</div>
-          <div class="ml-5 align-self-center text--secondary body-2">対重爆制空値:</div>
+          <div class="ml-5 align-self-center text--secondary body-2">Defense Value (HA):</div>
           <div class="align-self-center ml-1">{{ airbaseInfo.highDefenseAirPower }}</div>
-          <div class="ml-5 align-self-center text--secondary body-2">対重爆補正:</div>
+          <div class="ml-5 align-self-center text--secondary body-2">HA Modifier:</div>
           <div class="align-self-center ml-1 body-2">&times;{{ airbaseInfo.highDeffenseCoefficient }}</div>
           <div class="ml-8 difficulty-select">
             <v-select
@@ -80,15 +80,15 @@
               v-model="airbaseInfo.difficultyLevel"
               hide-details
               :items="difficultyLevelItem"
-              label="難易度"
+              label="Difficulty"
               @change="setInfo"
             ></v-select>
           </div>
         </template>
         <template v-else>
-          <div class="align-self-center text--secondary body-2">防空時制空値:</div>
+          <div class="align-self-center text--secondary body-2">Defense Value:</div>
           <div class="align-self-center ml-1">{{ airbaseInfo.defenseAirPower }}</div>
-          <div class="ml-5 align-self-center text--secondary body-2">対超重爆補正:</div>
+          <div class="ml-5 align-self-center text--secondary body-2">Defense Value (SHB):</div>
           <div class="align-self-center ml-1 body-2">
             &times;{{ Math.floor(100000 * airbaseInfo.superHighAirRaidCoefficient) / 100000 }}
           </div>
@@ -121,7 +121,7 @@
               </table>
             </div>
           </v-tooltip>
-          <div class="ml-5 align-self-center text--secondary body-2">対超重爆制空値:</div>
+          <div class="ml-5 align-self-center text--secondary body-2">Defense Value (SHB):</div>
           <div class="align-self-center ml-1">{{ airbaseInfo.fullSuperHighDefenseAirPower }}</div>
         </template>
       </div>
@@ -170,7 +170,7 @@
     <div v-else-if="airbaseInfo.isDefense" class="mx-2 mb-1">
       <!-- 超重爆時の計算結果 -->
       <div v-for="(result, i) in airbaseInfo.superHighAirRaidResults" :key="`high_result${i}`" class="mt-4 d-flex">
-        <div class="mr-1 align-self-center caption">第{{ i + 1 }}波</div>
+        <div class="mr-1 align-self-center caption">Wave {{ i + 1 }}</div>
         <div class="flex-grow-1">
           <air-status-result-bar :result="result" />
         </div>

@@ -1,64 +1,63 @@
 <template>
   <div class="site-top-container">
     <div class="site-title content">
-      制空権シミュレータ <span class="body-1">v{{ $store.state.siteVersion }}</span>
+      Air Power Simulator <span class="body-1">v{{ $store.state.siteVersion }}</span>
     </div>
     <v-card class="site-body content">
       <div class="menu-buttons">
         <div class="my-2 mx-4">
           <v-btn x-large color="green" dark @click="goAirCalcPage">
             <v-icon>mdi-calculator</v-icon>
-            <span class="ml-1">制空権シミュレータ</span>
+            <span class="ml-1">Air Power Simulator</span>
           </v-btn>
           <div class="mt-2 body-2">
-            <div>本サイトの主要機能です。</div>
+            <div>This is main function of this site.</div>
             <div class="mt-2">
-              基地航空隊や艦隊、敵艦隊を編成することで、道中を含めた全ての戦闘の制空状態や艦載機の損耗、全滅率などのシミュレーションが可能です。
+              By selecting Land Base Air Corps, Allied and Enemy Fleets, it's possible to simulate the Air State of all battles -- including the route -- the loss of aircraft, and the deplaning rates.
             </div>
           </div>
         </div>
         <div class="my-2 mx-4">
           <v-btn x-large dark color="blue" @click="$router.push('manager')">
             <v-icon>mdi-database-cog</v-icon>
-            <span class="ml-1">艦娘 / 装備管理</span>
+            <span class="ml-1">Shipgirl / Equipment Management</span>
           </v-btn>
           <div class="mt-2 body-2">
-            <div>サブの機能です。</div>
+            <div>This is a sub-function.</div>
             <div class="mt-2">
-              自分のゲーム内の艦娘、装備情報を登録すると、シミュレータ内で選択できる艦娘や装備に反映され、あの装備持ってた…？と悩む心配がなくなります。
+              Use this to designate ship and equipment information to reflet the ones in your own game. Do I have that ship or equipment..? You no longer have to remember.
             </div>
           </div>
         </div>
         <div class="mt-4 mx-4">
           <v-btn x-large dark color="blue darken-4" @click="$router.push('list')">
             <v-icon>mdi-human-greeting-variant</v-icon>
-            <span class="ml-1">みんなの編成</span>
+            <span class="ml-1">Public Fleets</span>
           </v-btn>
           <div class="mt-2 body-2">
-            <div>他の人がアップロードした編成データを閲覧できます。</div>
+            <div>You can check the fleets uploaded by other people</div>
           </div>
         </div>
       </div>
       <v-divider class="my-4"></v-divider>
       <div class="ma-2">
-        <div class="ml-2">データ引継ぎ</div>
+        <div class="ml-2">Data Transfer</div>
         <div class="ml-4 mt-2 body-2">
-          <a href="https://noro6.github.io/kcTools" target="_blank">旧制空権シミュレータ</a>
-          で作成していた編成データや、登録されていた装備、艦娘情報を引き継ぎます。
+          The data from <a href="https://noro6.github.io/kcTools" target="_blank">the older simulator</a>, such as registered equipment and ships will be retrieved automatically.
         </div>
         <div class="d-flex flex-wrap ml-2">
-          <v-btn class="ma-2" color="teal" @click="checkOldData()" :dark="!imported" :disabled="imported">データ引継ぎ(編成)</v-btn>
+          <v-btn class="ma-2" color="teal" @click="checkOldData()" :dark="!imported" :disabled="imported">Data transfer (Sortie Presets)</v-btn>
           <v-btn class="ma-2" color="teal" @click="checkOldStockData()" :dark="!importedStock" :disabled="importedStock">
-            データ引継ぎ(装備/艦娘)
+            Data transfer (Ships/Equipment)
           </v-btn>
         </div>
       </div>
       <v-divider class="my-4"></v-divider>
       <div class="ma-2">
-        <div class="ml-2">サイト連携</div>
+        <div class="ml-2">Deckbuilder integration</div>
         <div class="ml-4 mt-2 body-2">
-          <div>デッキビルダー形式をURLに?predeck=...で埋め込めば編成を読み込めます。</div>
-          <div class="text--secondary">(e.g.) https://noro6.github.io/kc-web?predeck={"version":4,"hqlv":120,"f1":{"s1":...</div>
+          <div>You can load KC Deckbuilder data by appending ?predeck= to the URL.</div>
+          <div class="text--secondary">(e.g.) https://arill.github.io/kc-web?predeck={"version":4,"hqlv":120,"f1":{"s1":...</div>
         </div>
       </div>
     </v-card>
@@ -172,7 +171,7 @@ export default Vue.extend({
       // 過去データが存在するかチェック
       const strage = window.localStorage;
       if (!strage) {
-        this.$emit('inform', '旧編成データが見つかりませんでした。', true);
+        this.$emit('inform', 'Old sortie data not found.', true);
         this.imported = true;
         return;
       }
@@ -180,7 +179,7 @@ export default Vue.extend({
       const presets = strage.getItem('presets');
       const presetJSON = presets ? JSON.parse(presets) : undefined;
       if (!presetJSON || !presetJSON.length) {
-        this.$emit('inform', '旧編成データが見つかりませんでした。', true);
+        this.$emit('inform', 'Old sortie data not found.', true);
         this.imported = true;
         return;
       }
@@ -194,7 +193,7 @@ export default Vue.extend({
       // 過去データが存在するかチェック
       const strage = window.localStorage;
       if (!strage) {
-        this.$emit('inform', '所持装備 / 艦娘データが見つかりませんでした。', true);
+        this.$emit('inform', 'Ship / Equipment data not found.', true);
         return;
       }
 
@@ -203,7 +202,7 @@ export default Vue.extend({
       const shipStocksJSON = shipStocks ? JSON.parse(shipStocks) : undefined;
       const itemStocksJSON = itemStocks ? JSON.parse(itemStocks) : undefined;
       if ((!shipStocksJSON || !shipStocksJSON.length) && (!itemStocksJSON || !itemStocksJSON.length)) {
-        this.$emit('inform', '所持装備 / 艦娘データが見つかりませんでした。', true);
+        this.$emit('inform', 'Ship / Equipment data not found.', true);
         return;
       }
 
@@ -222,7 +221,7 @@ export default Vue.extend({
       // 過去データが存在するかチェック
       const strage = window.localStorage;
       if (!strage) {
-        this.$emit('inform', '所持装備 / 艦娘データが見つかりませんでした。', true);
+        this.$emit('inform', 'Ship / Equipment data not found.', true);
         return;
       }
 
@@ -231,7 +230,7 @@ export default Vue.extend({
       const shipStocksJSON = shipStocks ? JSON.parse(shipStocks) : undefined;
       const itemStocksJSON = itemStocks ? JSON.parse(itemStocks) : undefined;
       if ((!shipStocksJSON || !shipStocksJSON.length) && (!itemStocksJSON || !itemStocksJSON.length)) {
-        this.$emit('inform', '所持装備 / 艦娘データが見つかりませんでした。', true);
+        this.$emit('inform', 'Ship / Equipment data not found.', true);
         return;
       }
 

@@ -16,14 +16,14 @@
       </v-btn>
       <v-btn class="header-btn" :disabled="!isAirCalcPage" text @click.stop="saveCurrentData">
         <v-icon small>mdi-content-save</v-icon>
-        <span class="d-none d-md-inline">編成</span>保存
+        <span class="d-none d-md-inline">Save preset</span>
       </v-btn>
       <v-btn class="header-btn" :disabled="!isAirCalcPage || mainSaveData.isUnsaved" text @click.stop="handleSaveAndRenameCurrentData">
-        <v-icon small>mdi-content-duplicate</v-icon>別名保存
+        <v-icon small>mdi-content-duplicate</v-icon>Save as
       </v-btn>
       <v-btn class="header-btn" :disabled="!isAirCalcPage" text @click.stop="clickedShare">
         <v-icon small>mdi-share-variant</v-icon>
-        <span class="d-none d-md-inline">編成</span>共有
+        <span class="d-none d-md-inline">Share preset</span>
       </v-btn>
       <v-tooltip bottom>
         <template v-slot:activator="{ on, attrs }">
@@ -31,7 +31,7 @@
             <v-icon small>mdi-undo-variant</v-icon></v-btn
           >
         </template>
-        <span>元に戻す</span>
+        <span>Undo</span>
       </v-tooltip>
       <v-tooltip bottom>
         <template v-slot:activator="{ on, attrs }">
@@ -39,7 +39,7 @@
             <v-icon small>mdi-redo-variant</v-icon>
           </v-btn>
         </template>
-        <span>やり直す</span>
+        <span>Redo</span>
       </v-tooltip>
       <div id="multipurpose-textarea" class="no-scroll">
         <v-textarea
@@ -48,7 +48,7 @@
           dense
           hide-details
           no-resize
-          placeholder="デッキビルダー形式データ:{version:4,hqlv:120,f1:{s1:..."
+          placeholder="Deckbuilder data:{version:4,hqlv:120,f1:{s1:..."
           rows="1"
           :color="getTextareaColor"
           :append-icon="somethingText ? 'mdi-send' : ''"
@@ -167,7 +167,7 @@
             </v-btn>
           </v-fab-transition>
         </template>
-        <span>やり直す</span>
+        <span>Redo</span>
       </v-tooltip>
       <v-tooltip left color="black">
         <template v-slot:activator="{ on, attrs }">
@@ -187,7 +187,7 @@
             </v-btn>
           </v-fab-transition>
         </template>
-        <span>元に戻す</span>
+        <span>Undo</span>
       </v-tooltip>
       <v-tooltip left color="black">
         <template v-slot:activator="{ on, attrs }">
@@ -207,7 +207,7 @@
             </v-btn>
           </v-fab-transition>
         </template>
-        <span>編成共有</span>
+        <span>Share preset</span>
       </v-tooltip>
       <v-tooltip left color="black">
         <template v-slot:activator="{ on, attrs }">

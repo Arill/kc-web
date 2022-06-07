@@ -32,16 +32,16 @@
     <v-divider></v-divider>
     <div class="d-flex pl-4 pt-1 pb-2 flex-wrap">
       <div class="mr-3 align-self-center">
-        <v-checkbox v-model="isFinal" :disabled="!!keyword" @change="filter()" dense hide-details label="最終改造"></v-checkbox>
+        <v-checkbox v-model="isFinal" :disabled="!!keyword" @change="filter()" dense hide-details label="Final Remodels only"></v-checkbox>
       </div>
       <div class="mr-3 align-self-center">
-        <v-checkbox v-model="daihatsuOK" :disabled="!!keyword" @click="filter()" dense hide-details :label="'大発搭載可'"></v-checkbox>
+        <v-checkbox v-model="daihatsuOK" :disabled="!!keyword" @click="filter()" dense hide-details :label="'Can equip Daihatsu'"></v-checkbox>
       </div>
       <div class="mr-3 align-self-center">
-        <v-checkbox v-model="naikateiOK" :disabled="!!keyword" @click="filter()" dense hide-details :label="'内火艇搭載可'"></v-checkbox>
+        <v-checkbox v-model="naikateiOK" :disabled="!!keyword" @click="filter()" dense hide-details :label="'Can equip Tank'"></v-checkbox>
       </div>
       <div class="mr-3 align-self-center" v-if="isStockOnly">
-        <v-checkbox v-model="isReleaseExSlotOnly" @click="filter()" dense hide-details :label="'補強増設あり'"></v-checkbox>
+        <v-checkbox v-model="isReleaseExSlotOnly" @click="filter()" dense hide-details :label="'Show only with RE'"></v-checkbox>
       </div>
       <div class="mr-3 align-self-center" v-if="shipStock.length">
         <v-checkbox
@@ -49,7 +49,7 @@
           @click="clickedStockOnly()"
           dense
           hide-details
-          :label="'在籍艦娘反映'"
+          :label="'Load stock equipment'"
           :disabled="disabledStockOnlyChange"
         ></v-checkbox>
       </div>
@@ -69,7 +69,7 @@
     <v-divider :class="{ 'ml-3': multiLine }"></v-divider>
     <div class="ship-table-body pb-2" :class="{ 'ml-3': multiLine }">
       <div v-if="!multiLine && ships.length" class="ship-status-header pr-3">
-        <div class="ship-status" v-for="i in 5" :key="`slot${i}`">搭載{{ i }}</div>
+        <div class="ship-status" v-for="i in 5" :key="`slot${i}`">Equipment {{ i }}</div>
       </div>
       <div v-for="(typeData, i) in ships" :key="i" class="pl-3">
         <div class="type-divider">
@@ -98,7 +98,7 @@
             <div class="flex-grow-1 ml-1">
               <div class="d-flex ship-caption">
                 <div v-if="isStockOnly" class="primary--text ship-level">Lv:{{ data.level }}</div>
-                <div v-if="isStockOnly">運:{{ data.luck }}</div>
+                <div v-if="isStockOnly">Luck:{{ data.luck }}</div>
                 <div v-else class="primary--text">id:{{ data.ship.albumId }}</div>
               </div>
               <div class="d-flex">
@@ -133,13 +133,13 @@
     <v-dialog v-model="confirmDialog" transition="scroll-x-transition" width="400">
       <v-card class="pa-3" v-if="confirmShip.ship">
         <div class="ma-4">
-          <div>{{ confirmShip.ship.name }}は既に配備されています。</div>
-          <div class="caption mt-2">※ 配備 を押せば無視して配備できます。</div>
+          <div>{{ confirmShip.ship.name }}has already been deployed.</div>
+          <div class="caption mt-2">※ You may ignore this by pressing Deploy again.</div>
         </div>
         <v-divider class="my-2"></v-divider>
         <div class="d-flex">
-          <v-btn class="ml-auto" color="info" dark @click.stop="clickedShip(confirmShip)">配備</v-btn>
-          <v-btn class="ml-4" color="secondary" @click.stop="confirmDialog = false">戻る</v-btn>
+          <v-btn class="ml-auto" color="info" dark @click.stop="clickedShip(confirmShip)">Deploy</v-btn>
+          <v-btn class="ml-4" color="secondary" @click.stop="confirmDialog = false">Back</v-btn>
         </div>
       </v-card>
     </v-dialog>

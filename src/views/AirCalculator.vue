@@ -1,7 +1,7 @@
 <template>
   <div class="mb-5" @dragover.prevent @drop="dropItem">
     <div class="minimize-group">
-      <v-btn class="mr-2" small v-if="!sortMode && setting.isMinimizedAirbase" @click="toggleMinimizeAirbase(false)">Land Base Squadrons</v-btn>
+      <v-btn class="mr-2" small v-if="!sortMode && setting.isMinimizedAirbase" @click="toggleMinimizeAirbase(false)">Land Base Air Corps</v-btn>
       <v-btn class="mr-2" small v-if="!sortMode && setting.isMinimizedFleet" @click="toggleMinimizeFleet(false)">Allied Fleet</v-btn>
       <v-btn class="mr-2" small v-if="!sortMode && setting.isMinimizedEnemy" @click="toggleMinimizeEnemy(false)">Enemy Fleet</v-btn>
       <v-btn class="mr-2" small v-if="!sortMode && setting.isMinimizedResult" @click="toggleMinimizeResult(false)">Simulation Results</v-btn>
@@ -11,7 +11,7 @@
     </div>
     <draggable handle=".content-frame" animation="150" :disabled="!sortMode" id="content-container" :class="{ 'sort-mode': sortMode }">
       <div id="airbase-content" class="content-frame" v-show="sortMode || !setting.isMinimizedAirbase">
-        <v-card v-if="sortMode" class="sort-container">Land Base Squadrons</v-card>
+        <v-card v-if="sortMode" class="sort-container">Land Base Air Corps</v-card>
         <airbase-all
           v-else
           v-model="calcManager.airbaseInfo"

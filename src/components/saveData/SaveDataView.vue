@@ -141,18 +141,18 @@ export default Vue.extend({
     addNewFile() {
       // 新規データ
       const data = new SaveData();
-      data.name = '新規データ';
+      data.name = 'New Data ';
       data.isUnsaved = false;
       this.addNewSaveData(data);
     },
     addNewDirectory() {
       // 新規フォルダー
       const folder = new SaveData();
-      folder.name = '新しいフォルダー';
+      folder.name = 'New Folder ';
       folder.isDirectory = true;
       folder.isUnsaved = false;
       this.addNewSaveData(folder);
-      this.handleInform('新しいフォルダーを作成しました');
+      this.handleInform('New Folder created.');
     },
     addNewSaveData(saveData: SaveData) {
       const data = this.rootData.childItems;
@@ -192,7 +192,7 @@ export default Vue.extend({
       this.$store.dispatch('updateSaveData', this.rootData);
     },
     openGitHub() {
-      window.open('https://github.com/noro6/kc-web/', '_blank');
+      window.open('https://github.com/arill/kc-web/', '_blank');
     },
     toggleFixDrawer() {
       const setting = this.$store.state.siteSetting as SiteSetting;

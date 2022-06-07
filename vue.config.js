@@ -4,7 +4,7 @@ module.exports = {
   pages: {
     index: {
       entry: 'src/main.ts',
-      title: '制空権シミュレータ v2',
+      title: 'Air Power Simulator v2',
     },
   },
 };

@@ -12,7 +12,7 @@
             <v-icon>mdi-camera</v-icon>
           </v-btn>
         </template>
-        <span>スクリーンショットを保存</span>
+        <span>Save screenshot</span>
       </v-tooltip>
       <v-tooltip bottom color="black">
         <template v-slot:activator="{ on, attrs }">
@@ -20,7 +20,7 @@
             <v-icon>mdi-minus</v-icon>
           </v-btn>
         </template>
-        <span>最小化</span>
+        <span>Minimize</span>
       </v-tooltip>
     </div>
     <v-divider></v-divider>

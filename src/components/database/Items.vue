@@ -11,7 +11,7 @@
             <div class="d-flex my-4">
               <v-text-field
                 class="search-input"
-                label="id 名称検索"
+                label="Search by ID"
                 dense
                 v-model.trim="searchWord"
                 @input="filter"

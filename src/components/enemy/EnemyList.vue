@@ -11,10 +11,10 @@
       <v-divider></v-divider>
       <div class="d-flex px-2 pt-2">
         <div class="align-self-center">
-          <v-text-field label="id 名称検索" v-model="keyword" clearable @input="filter()" prepend-inner-icon="mdi-magnify"></v-text-field>
+          <v-text-field label="Search by ID" v-model="keyword" clearable @input="filter()" prepend-inner-icon="mdi-magnify"></v-text-field>
         </div>
         <div class="ml-5 align-self-center">
-          <v-checkbox v-model="isLandbase" @change="filter()" label="地上施設"></v-checkbox>
+          <v-checkbox v-model="isLandbase" @change="filter()" label="Installations"></v-checkbox>
         </div>
         <v-spacer></v-spacer>
       </div>

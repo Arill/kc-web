@@ -127,7 +127,7 @@
               </template>
               <template v-else>
                 <td class="pr-1"></td>
-                <td class="pr-1 red--text">確殺</td>
+                <td class="pr-1 red--text">Deadly hit</td>
                 <td class="pr-1"></td>
               </template>
             </tr>

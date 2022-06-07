@@ -1,7 +1,7 @@
 <template>
   <v-card class="pa-2">
     <div class="d-flex pb-1 pr-2">
-      <div class="align-self-center ml-3">編成共有</div>
+      <div class="align-self-center ml-3">Share Preset</div>
       <v-spacer></v-spacer>
       <v-btn icon @click="close">
         <v-icon>mdi-close</v-icon>
@@ -19,7 +19,7 @@
           :disabled="loadingURL"
           @click="createURL()"
         >
-          <v-icon>mdi-web</v-icon>共有URLを生成
+          <v-icon>mdi-web</v-icon>Generate Share URL
         </v-btn>
         <v-text-field
           id="createdURL"
@@ -36,7 +36,7 @@
       </div>
       <div class="my-8">
         <v-btn block color="blue" class="white--text" @click="shareTwitter()" :loading="loadingTwitter" :disabled="loadingTwitter">
-          <v-icon>mdi-twitter</v-icon>Twitterで共有
+          <v-icon>mdi-twitter</v-icon>Share on Twitter
         </v-btn>
       </div>
       <div class="my-8">
@@ -48,7 +48,7 @@
           :href="`https://jervis.vercel.app/?predeck=${encodeURIComponent(deckBuilder)}`"
           target="_blank"
         >
-          <v-icon>mdi-anchor</v-icon>作戦室で開く
+          <v-icon>mdi-anchor</v-icon>Export to Jervis App
         </v-btn>
       </div>
       <div class="my-8">
@@ -59,7 +59,7 @@
           :href="`http://kancolle-calc.net/deckbuilder.html?predeck=${encodeURIComponent(deckBuilder)}`"
           target="_blank"
         >
-          デッキビルダーで開く
+          Export to Deckbuilder
         </v-btn>
       </div>
       <div class="mt-10">
@@ -72,7 +72,7 @@
           rows="1"
           @click:append="copyDeckBuilder"
           @blur="clearDeckHint"
-          label="デッキビルダー形式"
+          label="Deckbuilder string"
           id="deck-builder-text"
           :hint="copiedDeckHint"
         ></v-textarea>
