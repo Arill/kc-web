@@ -36,7 +36,7 @@
         <div class="mx-4 mt-4">
           <div class="body-2">未保存の変更内容がありますが、このまま編成タブを閉じますか？</div>
           <div class="mt-3 caption">
-            戻って保存するには、画面上部の「<v-icon small>mdi-content-save</v-icon>編成保存」を押してください。
+            戻って保存するには、画面上部の「<v-icon small>mdi-content-save</v-icon>Save Preset」を押してください。
           </div>
           <div class="caption">変更内容を破棄してタブを閉じる場合は、このままOKボタンを押してください。</div>
         </div>
@@ -54,14 +54,14 @@
     <v-dialog v-model="editDialog" transition="scroll-x-transition" width="800">
       <v-card class="pa-3">
         <div class="mx-4 mt-4">
-          <v-text-field v-model.trim="editedName" dense outlined maxlength="100" counter label="編成データ名"></v-text-field>
+          <v-text-field v-model.trim="editedName" dense outlined maxlength="100" counter label="Preset save data name"></v-text-field>
           <v-textarea
             v-model.trim="editedRemarks"
             rows="10"
             outlined
             dense
             hide-details
-            label="補足情報"
+            label="Additional information"
             class="remarks-input"
           ></v-textarea>
           <div class="d-flex mt-3">

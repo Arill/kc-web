@@ -510,7 +510,7 @@ export default Vue.extend({
     tooltipItem: new Item(),
     tooltipX: 0,
     tooltipY: 0,
-    rangeText: ['', 'Short', 'Medium', 'Long', 'Very Long', 'Very Long+', 'Super Long', 'Super Long+', 'Global', 'Global+'],
+    rangeText: ['', 'Short', 'Medium', 'Long', 'Very Long', 'Very Long+', 'Super Long', 'Super Long+', 'Longest', 'Longest+'],
   }),
   computed: {
     ship(): Ship {

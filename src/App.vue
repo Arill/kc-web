@@ -227,7 +227,7 @@
             </v-btn>
           </v-fab-transition>
         </template>
-        <span>編成名 / 補足情報</span>
+        <span>編成名 / Additional information</span>
       </v-tooltip>
       <v-tooltip left color="black">
         <template v-slot:activator="{ on, attrs }">
@@ -247,7 +247,7 @@
             </v-btn>
           </v-fab-transition>
         </template>
-        <span>編成保存</span>
+        <span>Save Preset</span>
       </v-tooltip>
       <span class="d-md-none text-caption">
         <span class="mr-2">要望・バグ報告:</span>
@@ -437,26 +437,26 @@
     <v-dialog v-model="editDialog" width="800">
       <v-card class="pa-3">
         <v-tabs v-model="saveDialogTab" @change="changeUploadTabs">
-          <v-tab href="#save">編成保存</v-tab>
-          <v-tab href="#upload" :disabled="disabledUpload">編成アップロード</v-tab>
+          <v-tab href="#save">Save Preset</v-tab>
+          <v-tab href="#upload" :disabled="disabledUpload">Upload Preset</v-tab>
         </v-tabs>
         <v-divider></v-divider>
         <v-tabs-items v-model="saveDialogTab" :touchless="true">
           <v-tab-item value="save">
             <div class="mx-4 mt-4">
-              <v-text-field v-model="editedName" dense outlined maxlength="100" counter label="編成データ名"></v-text-field>
+              <v-text-field v-model="editedName" dense outlined maxlength="100" counter label="Preset save data name"></v-text-field>
               <v-textarea
                 v-model.trim="editedRemarks"
                 rows="10"
                 dense
                 outlined
                 hide-details
-                label="補足情報"
+                label="Additional information"
                 class="remarks-input"
               ></v-textarea>
               <div class="d-flex mt-3">
-                <v-btn class="ml-auto" color="success" @click.stop="saveAndRenameCurrentData" :disabled="isNameEmptry">保存</v-btn>
-                <v-btn class="ml-4" color="secondary" @click.stop="editDialog = false">戻る</v-btn>
+                <v-btn class="ml-auto" color="success" @click.stop="saveAndRenameCurrentData" :disabled="isNameEmptry">Save</v-btn>
+                <v-btn class="ml-4" color="secondary" @click.stop="editDialog = false">Back</v-btn>
               </div>
             </div>
           </v-tab-item>
@@ -1486,7 +1486,7 @@ export default Vue.extend({
   background: none !important;
 }
 
-/** セーブデータ補足情報textarea指定 */
+/** セーブデータAdditional informationtextarea指定 */
 .remarks-input textarea {
   font-size: 0.8em;
   line-height: 1.2rem;

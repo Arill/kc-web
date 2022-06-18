@@ -84,7 +84,7 @@
             outlined
             maxlength="100"
             counter
-            :label="`${value.isDirectory ? 'フォルダー名' : '編成データ名'}`"
+            :label="`${value.isDirectory ? 'フォルダー名' : 'Preset save data name'}`"
           ></v-text-field>
           <v-textarea
             v-if="!value.isDirectory"
@@ -93,7 +93,7 @@
             dense
             outlined
             hide-details
-            label="補足情報"
+            label="Additional information"
             class="remarks-input"
           ></v-textarea>
           <div class="d-flex mt-2">

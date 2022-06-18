@@ -1,14 +1,14 @@
 <template>
   <div class="mx-4 mt-4">
-    <div class="body-2 mt-2 mb-5">『トップページ > みんなの編成』ページにて公開される編成をアップロードできます。</div>
+    <div class="body-2 mt-2 mb-5">You can upload your fleet and preset data to be published on the (Main Page > Public Fleets) page.</div>
     <v-form ref="uploadForm">
-      <v-text-field v-model="editedName" dense outlined counter="100" label="編成データ名" :rules="nameRules" required></v-text-field>
+      <v-text-field v-model="editedName" dense outlined counter="100" label="Preset save data name" :rules="nameRules" required></v-text-field>
       <v-textarea
         v-model.trim="editedRemarks"
         rows="8"
         dense
         outlined
-        label="補足情報"
+        label="Additional information"
         required
         :rules="remarksRules"
         class="remarks-input mt-2"
@@ -21,41 +21,39 @@
             outlined
             hide-details
             :items="areaItems"
-            label="海域"
+            label="Map"
             :menu-props="{ maxHeight: '600px' }"
           ></v-select>
         </div>
         <div v-show="isEvent" class="ml-5">
-          <v-select dense v-model="level" outlined hide-details :items="levelItems" label="難易度"></v-select>
+          <v-select dense v-model="level" outlined hide-details :items="levelItems" label="Difficulty"></v-select>
         </div>
       </div>
       <div class="mt-5">
-        <v-text-field v-model="uploadUserName" :rules="userNameRules" dense outlined counter="20" label="投稿者"></v-text-field>
+        <v-text-field v-model="uploadUserName" :rules="userNameRules" dense outlined counter="20" label="Author"></v-text-field>
       </div>
     </v-form>
     <div class="d-flex">
-      <v-btn class="ml-auto" color="primary" @click.stop="validateUpload">アップロード</v-btn>
-      <v-btn class="ml-4" color="secondary" @click.stop="editDialog = false">戻る</v-btn>
+      <v-btn class="ml-auto" color="primary" @click.stop="validateUpload">Upload</v-btn>
+      <v-btn class="ml-4" color="secondary" @click.stop="editDialog = false">Back</v-btn>
     </div>
     <v-dialog v-model="uploadConfirmDialog" transition="scroll-x-transition" width="600">
       <v-card class="pa-3">
         <div class="ma-4">
-          <div>編成のアップロードを行います。よろしいですか？</div>
+          <div>Are you sure you want to upload?</div>
           <div class="caption mt-5 mx-3">
-            <div>海域、難易度の指定が正しいか、アップロード前に今一度確認してください。</div>
-            <div>原則、アップロードした編成をあとから編集・削除することはできません。</div>
-            <div>どうしても削除したい場合、編成名や投稿者、出撃海域、更新日時や編成の特徴など、</div>
+            <div>Please check again if the map and difficulty specified are correct.</div>
+            <div>By principle, you cannot edit or delete the data after the upload.</div>
+            <div>IF you really want to delete it, contact us with information</div>
             <div>
-              削除対象が特定できる情報を添えて
-              <a href="https://odaibako.net/u/noro_006" class="blue--text text--accent-1" target="_blank">こちら</a>
-              等にご連絡ください。
+              that can identify the preset (such as name, poster, map, upload date and time) through <a href="https://odaibako.net/u/noro_006" class="blue--text text--accent-1" target="_blank">here</a>
             </div>
           </div>
         </div>
         <v-divider class="my-2"></v-divider>
         <div class="d-flex">
-          <v-btn class="ml-auto" color="primary" :dark="!uploadClicked" :disabled="uploadClicked" @click.stop="uploadSaveData">続行</v-btn>
-          <v-btn class="ml-4" color="secondary" @click.stop="uploadConfirmDialog = false">戻る</v-btn>
+          <v-btn class="ml-auto" color="primary" :dark="!uploadClicked" :disabled="uploadClicked" @click.stop="uploadSaveData">Continue</v-btn>
+          <v-btn class="ml-4" color="secondary" @click.stop="uploadConfirmDialog = false">Back</v-btn>
         </div>
       </v-card>
     </v-dialog>
@@ -101,7 +99,7 @@ export default Vue.extend({
     uploadConfirmDialog: false,
     uploadClicked: false,
     nameRules: [(v: string) => !!v || '編成名は必須です。', (v: string) => v.length <= 100 || '1～100文字以内で入力してください。'],
-    remarksRules: [(v: string) => !!v || '補足情報は必須です。'],
+    remarksRules: [(v: string) => !!v || 'Additional informationは必須です。'],
     userNameRules: [(v: string) => v.length <= 20 || '0～20文字以内で入力してください。'],
   }),
   mounted() {

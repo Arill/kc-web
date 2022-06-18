@@ -519,10 +519,10 @@ export default class Const {
     { text: 'Echelon', value: FORMATION.ECHELON, correction: 1.0 },
     { text: 'Line Abreast', value: FORMATION.LINE_ABREAST, correction: 1.0 },
     { text: 'Vanguard', value: FORMATION.VANGUARD, correction: 1.1 },
-    { text: 'Cruising Formation 1 (ASW)', value: FORMATION.FORMATION1, correction: 1.1 },
-    { text: 'Cruising Formation 2 (Double Line)', value: FORMATION.FORMATION2, correction: 1.0 },
-    { text: 'Cruising Formation 3 (Diamond)', value: FORMATION.FORMATION3, correction: 1.5 },
-    { text: 'Cruising Formation 4 (Line Ahead)', value: FORMATION.FORMATION4, correction: 1.0 },
+    { text: 'CF 1', value: FORMATION.FORMATION1, correction: 1.1 },
+    { text: 'CF 2', value: FORMATION.FORMATION2, correction: 1.0 },
+    { text: 'CF 3', value: FORMATION.FORMATION3, correction: 1.5 },
+    { text: 'CF 4', value: FORMATION.FORMATION4, correction: 1.0 },
   ];
 
   /**

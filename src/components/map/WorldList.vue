@@ -9,15 +9,15 @@
             hide-details
             :items="areaItems"
             @change="worldChanged"
-            label="海域"
+            label="Map"
             :menu-props="{ maxHeight: '600px' }"
           ></v-select>
         </div>
         <div v-show="isEvent">
-          <v-select dense v-model="level" hide-details :items="levelItems" @change="worldChanged" label="難易度"></v-select>
+          <v-select dense v-model="level" hide-details :items="levelItems" @change="worldChanged" label="Difficulty"></v-select>
         </div>
         <div>
-          <v-select dense v-model="cellIndex" hide-details :items="cellItems" @change="cellChanged" label="セル"></v-select>
+          <v-select dense v-model="cellIndex" hide-details :items="cellItems" @change="cellChanged" label="Node"></v-select>
         </div>
       </div>
       <div class="map-img-area">
@@ -41,30 +41,30 @@
           <v-tab-item v-for="(fleet, i) in fleetPatterns" :key="i" :value="`pattern${i}`">
             <v-divider></v-divider>
             <div class="d-flex flex-wrap cell-info-row mt-1">
-              <div class="ml-2 text--secondary">戦闘形式:</div>
+              <div class="ml-2 text--secondary">Type:</div>
               <div class="ml-2">{{ getCellName(fleet.cellType) }}</div>
-              <div class="ml-3 text--secondary">陣形:</div>
+              <div class="ml-3 text--secondary">Formation:</div>
               <div class="ml-2">{{ getFormationName(fleet.formation) }}</div>
-              <div class="ml-3 text--secondary d-none d-sm-block">艦隊防空値:</div>
+              <div class="ml-3 text--secondary d-none d-sm-block">Fleet AA:</div>
               <div class="ml-2 d-none d-sm-block">{{ fleet.fleetAntiAir }}</div>
-              <div class="ml-3 text--secondary" v-if="fleet.range">半径:</div>
+              <div class="ml-3 text--secondary" v-if="fleet.range">Range:</div>
               <div class="ml-2" v-if="fleet.range">{{ fleet.range }}</div>
               <v-spacer></v-spacer>
-              <div class="text--secondary">詳細:</div>
+              <div class="text--secondary">Details:</div>
               <v-btn v-show="selectedFleet" color="info" icon @click.stop@="showEnemyFleetDetail">
                 <v-icon>mdi-information-outline</v-icon>
               </v-btn>
             </div>
             <div v-if="isAirRaid" class="d-flex cell-info-row flex-wrap px-2">
-              <div class="text--secondary mr-2">制空値:</div>
+              <div class="text--secondary mr-2">Air Power:</div>
               <div>{{ fleet.fullAirbaseAirPower }}</div>
               <div v-if="fleet.existUnknownEnemy" class="mx-2">
                 <v-tooltip bottom color="black">
                   <template v-slot:activator="{ on, attrs }">
                     <v-icon color="warning" v-bind="attrs" v-on="on">mdi-alert</v-icon>
                   </template>
-                  <div>搭載数が未確定の敵艦が含まれています。</div>
-                  <div>表示制空値は目安のもので、正確な制空値ではありません。</div>
+                  <div>Includes enemies with undiscovered Air Power values.</div>
+                  <div>The displayed Air Power value is only an estimate and is not an accurate value.</div>
                 </v-tooltip>
               </div>
               <div class="ml-2">
@@ -87,7 +87,7 @@
               </div>
             </div>
             <div v-else-if="fleet.fullAirPower" class="d-flex cell-info-row flex-wrap px-2">
-              <div class="text--secondary">制空値:</div>
+              <div class="text--secondary">Air Power:</div>
               <div class="mx-3">{{ fleet.fullAirPower }}</div>
               <div>
                 <v-chip class="mr-1" color="green" label outlined>
@@ -123,9 +123,9 @@
                   <div class="align-self-center flex-grow-1">
                     <div class="d-flex text-id">
                       <div class="primary--text">id:{{ enemy.data.id }}</div>
-                      <div class="ml-2" v-if="enemy.fullAirPower">制空: {{ enemy.fullAirPower }}</div>
+                      <div class="ml-2" v-if="enemy.fullAirPower">Air Power: {{ enemy.fullAirPower }}</div>
                       <div v-if="enemy.data.isUnknown && enemy.fullLBAirPower">?</div>
-                      <div class="ml-2" v-if="enemy.fullLBAirPower !== enemy.fullAirPower">制空:({{ enemy.fullLBAirPower }})</div>
+                      <div class="ml-2" v-if="enemy.fullLBAirPower !== enemy.fullAirPower">Air Power: ({{ enemy.fullLBAirPower }})</div>
                     </div>
                     <div class="d-flex">
                       <div class="text-name text-truncate" :class="{ 'orange--text text--darken-2': enemy.data.isUnknown }">
@@ -149,11 +149,11 @@
                   <div class="align-self-center flex-grow-1">
                     <div class="d-flex text-id">
                       <div class="primary--text">id:{{ enemy.data.id }}</div>
-                      <div class="ml-2" v-if="enemy.fullAirPower">制空:{{ enemy.fullAirPower }}</div>
-                      <div class="ml-2" v-if="enemy.fullLBAirPower !== enemy.fullAirPower">制空:({{ enemy.fullLBAirPower }})</div>
+                      <div class="ml-2" v-if="enemy.fullAirPower">Air Power: {{ enemy.fullAirPower }}</div>
+                      <div class="ml-2" v-if="enemy.fullLBAirPower !== enemy.fullAirPower">Air Power: ({{ enemy.fullLBAirPower }})</div>
                       <div class="ml-1" v-if="enemy.data.isUnknown && enemy.fullLBAirPower">?</div>
-                      <div class="ml-2 text--secondary" v-if="!fleet.isUnion">耐久: {{ enemy.data.hp }}</div>
-                      <div class="ml-2 text--secondary" v-if="!fleet.isUnion">装甲: {{ enemy.actualArmor }}</div>
+                      <div class="ml-2 text--secondary" v-if="!fleet.isUnion">HP: {{ enemy.data.hp }}</div>
+                      <div class="ml-2 text--secondary" v-if="!fleet.isUnion">Armor: {{ enemy.actualArmor }}</div>
                     </div>
                     <div class="d-flex">
                       <div class="text-name text-truncate" :class="{ 'orange--text text--darken-2': enemy.data.isUnknown }">
@@ -178,8 +178,8 @@
       <v-card-actions>
         <div v-if="selectedNodeNames.length" class="body-2">選択したセル: {{ selectedNodeNames.join(" → ") }}</div>
         <v-spacer></v-spacer>
-        <v-btn color="primary" @click="commitFleet" :disabled="!enabledCommitBtn">展開</v-btn>
-        <v-btn color="secondary" @click="close">閉じる</v-btn>
+        <v-btn color="primary" @click="commitFleet" :disabled="!enabledCommitBtn">Select</v-btn>
+        <v-btn color="secondary" @click="close">Back</v-btn>
       </v-card-actions>
     </v-card>
     <v-snackbar v-model="snackbar" color="primary" outlined>
@@ -509,7 +509,7 @@ export default Vue.extend({
             mainFleetFormation,
           }),
         );
-        patternNames.push(cell.detail ? cell.detail : `編成${j + 1}`);
+        patternNames.push(cell.detail ? cell.detail : `Fleet ${j + 1}`);
       }
 
       this.fleetPatterns = enemyFleets;

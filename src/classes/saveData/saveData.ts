@@ -60,7 +60,7 @@ export default class SaveData {
   /** 名称 */
   public name: string;
 
-  /** 補足情報 */
+  /** Additional information */
   public remarks: string;
 
   /** セーブデータ本体 非ディレクトリのみ有効 */

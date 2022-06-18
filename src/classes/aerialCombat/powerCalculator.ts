@@ -108,6 +108,8 @@ export default class AerialFirePowerCalculator {
     let adj = 0;
     // 搭載数補正
     let adj2 = 1.8;
+    // B-25 bonuses
+    let adj3 = 1;
     switch (type) {
       case 8:
         // 艦攻
@@ -135,13 +137,29 @@ export default class AerialFirePowerCalculator {
           fire = item.data.torpedo * 1.1 + item.bonusTorpedo;
         } else if (item.data.id === 406 && (SHIP_TYPE.BB === shipType || SHIP_TYPE.BBV === shipType || SHIP_TYPE.BBB === shipType)) {
           // Do 217 K-2 + Fritz-X VS 戦艦の場合 雷装1.1倍
-          fire = item.data.torpedo * 1.1 + item.bonusTorpedo;
+          fire = item.data.torpedo * 1.35 + item.bonusTorpedo;
         } else if (item.data.id === 444) {
           // 四式重爆 飛龍+イ号一型甲 誘導弾 雷装1.15倍
           fire = item.data.torpedo * 1.15 + item.bonusTorpedo;
         } else if (item.data.id === 454 && (shipType === SHIP_TYPE.DD || shipType === SHIP_TYPE.CL || shipType === SHIP_TYPE.CA)) {
           // キ102乙改＋イ号一型乙 誘導弾 VS 駆逐 or 軽巡 or 重巡 の場合 雷装1.16倍
           fire = item.data.torpedo * 1.16 + item.bonusTorpedo;
+        } else if (item.data.id === 459 && (shipType === SHIP_TYPE.DD)) {
+          // B-25 vs DD
+          fire = item.actualTorpedo;
+          adj3 = 1.9;
+        } else if (item.data.id === 459 && (shipType === SHIP_TYPE.CL)) {
+          // B-25 vs CL
+          fire = item.actualTorpedo;
+          adj3 = 1.75;
+        } else if (item.data.id === 459 && (shipType === SHIP_TYPE.CA || shipType === SHIP_TYPE.CAV)) {
+          // B-25 vs CA(V)
+          fire = item.actualTorpedo;
+          adj3 = 1.6;
+        } else if (item.data.id === 459 && (SHIP_TYPE.BB === shipType || SHIP_TYPE.BBV === shipType || SHIP_TYPE.BBB === shipType || SHIP_TYPE.CV === shipType || SHIP_TYPE.CVL === shipType)) {
+          // B-25 vs (F)BB(V), CV(L)
+          fire = item.actualTorpedo;
+          adj3 = 1.3;
         } else {
           // 陸攻 上記以外
           fire = item.actualTorpedo;
@@ -166,7 +184,7 @@ export default class AerialFirePowerCalculator {
     // 雷装ボーナス適用
     fire *= args.torpedoBonus;
     // 基本攻撃力 = 種別倍率 × {(雷装 or 爆装) × √(搭載数補正 × 搭載数) + 25} * キャップ前ボーナス
-    let p = Math.floor(adj * (fire * Math.sqrt(adj2 * slot) + 25) * args.beforCapBonus);
+    let p = Math.floor(adj * (fire * Math.sqrt(adj2 * slot) + 25) * args.beforCapBonus * adj3);
 
     // キャップ
     p = CommonCalc.softCap(p, CAP.AS);
