@@ -87,6 +87,10 @@ export default Vue.extend({
       type: String,
       required: true,
     },
+    cancelDialog: {
+      type: Function,
+      required: true,
+    },
   },
   data: () => ({
     areaItems: [] as ({ divider: boolean } | { header: string } | { value: number; text: string; group: string })[],

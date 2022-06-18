@@ -82,6 +82,9 @@ export default class SiteSetting {
   /** デッキビルダーからの取込時、全て取り込む */
   public importAllDeck: boolean;
 
+  /** フィルタ保存値 */
+  public savedfilter: { parent: 'ship' | 'airbase', key: string, value: number }[]
+
   constructor(setting?: SiteSetting) {
     if (setting) {
       this.id = setting.id;
@@ -107,6 +110,7 @@ export default class SiteSetting {
       this.itemUI = setting.itemUI ? setting.itemUI : { border: false, bold: true, radius: true };
       this.disabledItemTooltip = !!setting.disabledItemTooltip;
       this.importAllDeck = !!setting.importAllDeck;
+      this.savedfilter = setting.savedfilter ? setting.savedfilter : [{ parent: 'ship', key: 'actualFire', value: 0 }, { parent: 'airbase', key: 'radius', value: 0 }];
 
       if (!setting.planeInitialLevels || !setting.planeInitialLevels.length) {
         this.planeInitialLevels = [
@@ -153,6 +157,7 @@ export default class SiteSetting {
       this.itemUI = { border: false, bold: true, radius: true };
       this.disabledItemTooltip = false;
       this.importAllDeck = false;
+      this.savedfilter = [{ parent: 'ship', key: 'actualFire', value: 0 }, { parent: 'airbase', key: 'radius', value: 0 }];
 
       this.planeInitialLevels = [
         { id: 6, level: 100 },

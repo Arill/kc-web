@@ -78,8 +78,12 @@
     </v-app-bar>
     <v-main>
       <div class="event-banner">
-        <v-img class="banner-normal" :src="`./img/util/banner.png`" height="100" width="760" />
-        <v-img class="banner-on" :src="`./img/util/banner_on.png`" height="100" width="760" />
+        <v-img class="banner-normal" :src="`./img/util/banner.png`" />
+        <v-img class="banner-on" :src="`./img/util/banner_on.png`" />
+      </div>
+      <div class="event-banner">
+        <v-img class="banner-normal" :src="`./img/util/banner2.png`" />
+        <v-img class="banner-on" :src="`./img/util/banner2_on.png`" />
       </div>
       <div v-if="readOnlyMode" :class="{ 'px-2 px-md-4': !isManagerPage, 'px-6 px-md-8': isManagerPage }">
         <v-alert border="left" outlined type="info" :class="{ 'info-container': !isManagerPage }">
@@ -467,6 +471,7 @@
               :dataName="editedName"
               :dataRemarks="editedRemarks"
               :saveData="saveData"
+              :cancelDialog="closeEditDialog"
             />
           </v-tab-item>
         </v-tabs-items>
@@ -1006,6 +1011,9 @@ export default Vue.extend({
       }
       this.editDialog = false;
     },
+    closeEditDialog() {
+      this.editDialog = false;
+    },
     undoClicked() {
       // 元に戻す
       const data = this.mainSaveData;
@@ -1327,17 +1335,21 @@ export default Vue.extend({
 }
 
 .event-banner {
+  position: relative;
   max-width: 760px;
   height: 100px;
   margin: 0 auto;
 }
 .event-banner .banner-on,
-.event-banner:hover .banner-normal {
-  height: 0px !important;
+.event-banner .banner-normal {
+  position: absolute;
 }
-.event-banner .banner-normal,
-.event-banner:hover .banner-on {
-  height: unset !important;
+.event-banner .banner-on {
+  transition: 0.2s;
+  opacity: 0;
+}
+.event-banner .banner-on:hover {
+  opacity: 1;
 }
 
 .selectable-fleet-container {
