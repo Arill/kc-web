@@ -59791,7 +59791,7 @@
             "aa": 53,
             "armor": 67,
             "landbase": 0,
-            "unknown": 1
+            "unknown": 0
         },
         {
             "id": 2104,
@@ -59815,7 +59815,7 @@
             "aa": 73,
             "armor": 97,
             "landbase": 0,
-            "unknown": 1
+            "unknown": 0
         },
         {
             "id": 2105,
@@ -59879,13 +59879,13 @@
             ],
             "items": [
                 581,
-                575,
+                574,
                 582,
                 583
             ],
-            "hp": 0,
-            "aa": 0,
-            "armor": 0,
+            "hp": 720,
+            "aa": 180,
+            "armor": 248,
             "landbase": 0,
             "unknown": 1
         },
@@ -60052,8 +60052,8 @@
                 580
             ],
             "hp": 1060,
-            "aa": 148,
-            "armor": 0,
+            "aa": 168,
+            "armor": 348,
             "landbase": 0,
             "unknown": 0
         }
